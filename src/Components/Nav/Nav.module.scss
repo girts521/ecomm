@@ -1,0 +1,136 @@
+.container {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    height: 40px;
+    padding: 5px;
+    width: 100vw;
+    background-color: #caf0f8;
+    /* border: 1px solid black; */
+}
+
+
+.burger{
+    height: 30px;
+    position: absolute;
+    top: 11px;
+    left: 10px;
+}
+
+.burgerShow{
+    opacity: 1;
+    transform: rotate(-180deg);
+    transition-delay: 0.3s;
+    transition-duration: 1s;
+    transition-property: opacity, transform;
+}
+
+.burgerHidden {
+    z-index: 1;
+    opacity: 0;
+    transform: rotate(180deg);
+    transition-delay: 0.1s;
+    transition-duration: 1s;
+    transition-property: opacity, transform;
+  }
+
+  .xHidden{
+    opacity: 0;
+    z-index: 1;
+    position: absolute;
+    top: 14px;
+    left: 17px;
+    transform: rotate(-180deg);
+    transition-delay: 0.1s;
+    transition-duration: 1s;
+    transition-property: opacity, transform;
+  }
+
+  .xOpen{
+    opacity: 1;
+    z-index: 2;
+    transform: rotate(180deg);
+    transition-delay: 0.5s;
+    transition-duration: 0.5s;
+    transition-property: opacity, transform;
+  }
+
+  .circle {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    height: 50px;
+    width: 50px;
+    background: linear-gradient(149deg, #90e0ef, #023e8a);
+    background-size: 500% 100%;
+    border-radius: 50%;
+    z-index: 3;
+    overflow: hidden;
+    transition-delay: 0.2s;
+    transition-duration: 0.5s;
+    transition-property: height, width, border-radius;
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+  
+  .open {
+    transition-delay: 0.2s;
+    transition-duration: 0.5s;
+    transition-property: height, width, border-radius;
+    height: 100vh;
+    width: 80vw;
+    border-radius: 0;
+    padding: 0;
+    margin: 0;
+    animation: AnimationName 5s ease 1;
+    animation-fill-mode: forwards;
+  }
+
+  .burgerLinks{
+      margin-top: 50px;  
+
+      li {
+          padding: 7px;
+      }
+  }
+
+.brand{
+    font-size: 16px;
+    font-weight: 700;
+    margin-right: 40px;
+}
+
+.right{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.login {
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-right: 10px;
+}
+
+.cart{
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+@keyframes AnimationName {
+    0% {
+      background-position: 9% 0%;
+    }
+    50% {
+      background-position: 92% 100%;
+    }
+    100% {
+      background: linear-gradient(149deg, #90e0ef, #023e8a);
+      background-size: 100% 100%;
+    }
+  }

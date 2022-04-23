@@ -1,10 +1,95 @@
-import React from "react";
-import styles from "./Nav.module.css";
+import React, { useState } from "react";
+import styles from "./Nav.module.scss";
 
 const Nav: React.FC = () => {
+  const [show, setShow] = useState(true);
+
+  const showNav = () => {
+    setShow(!show);
+  };
+
   return (
     <div className={styles.container}>
-      <div className={styles.burger}></div>
+      <div onClick={showNav} className={`${styles.circle} ${show ? '' : styles.open}`}>
+        <svg
+          className={`${styles.burger} ${
+            show ? styles.burgerShow : styles.burgerHidden
+          } `}
+          xmlns="http://www.w3.org/2000/svg"
+          version="1.1"
+          x="0px"
+          y="0px"
+          viewBox="0 0 384.97 384.97"
+        >
+          <path d="M12.03,84.212h360.909c6.641,0,12.03-5.39,12.03-12.03c0-6.641-5.39-12.03-12.03-12.03H12.03    C5.39,60.152,0,65.541,0,72.182C0,78.823,5.39,84.212,12.03,84.212z" />
+          <path d="M372.939,180.455H12.03c-6.641,0-12.03,5.39-12.03,12.03s5.39,12.03,12.03,12.03h360.909c6.641,0,12.03-5.39,12.03-12.03    S379.58,180.455,372.939,180.455z" />
+          <path d="M372.939,300.758H12.03c-6.641,0-12.03,5.39-12.03,12.03c0,6.641,5.39,12.03,12.03,12.03h360.909    c6.641,0,12.03-5.39,12.03-12.03C384.97,306.147,379.58,300.758,372.939,300.758z" />
+        </svg>
+
+        <svg
+          className={`${styles.xHidden} ${show ? '' : styles.xOpen}`}
+          xmlns="http://www.w3.org/2000/svg"
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <line x1="18" y1="6" x2="6" y2="18" />
+          <line x1="6" y1="6" x2="18" y2="18" />
+        </svg>
+
+        {show ? '' : <div className={styles.burgerLinks}>
+          <ul>
+            <li>
+              <a href="#">Home</a>
+            </li>
+            <li>
+              <a href="#">Category 1</a>
+            </li>
+            <li>
+              <a href="#">Category 2</a>
+            </li>
+            <li>
+              <a href="#">Category 3</a>
+            </li>
+            <li>
+              <a href="#">Category 4</a>
+            </li>
+            <li>
+              <a href="#">Category 5</a>
+            </li>
+            <li>
+              <a href="#">Category 6</a>
+            </li>
+            <li>
+              <a href="#">Category 7</a>
+            </li>
+            <li>
+              <a href="#">Category 8</a>
+            </li>
+            <li>
+              <a href="#">Category 9</a>
+            </li>
+            <li>
+              <a href="#">Category 10</a>
+            </li>
+            <li>
+              <a href="#">About</a>
+            </li>
+            <li>
+              <a href="#">Contact</a>
+            </li>
+            <li>
+              <a href="#">FAQ</a>
+            </li>
+          </ul>
+        </div>}
+
+      </div>
       <div className={styles.brand}>My Brand Name</div>
       <div className={styles.right}>
         <div className={styles.login}>
@@ -39,3 +124,4 @@ const Nav: React.FC = () => {
 };
 
 export default Nav;
+

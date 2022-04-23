@@ -1,0 +1,9 @@
+//grid with 2 images
+.container{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    grid-gap: 10px;
+    // margin-bottom: 20px;
+    margin: 20px auto;
+}

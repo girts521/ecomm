@@ -1,0 +1,17 @@
+.container{
+    // border: 2px solid black;
+    height: 140px;
+    display: flex;
+    flex-direction: row;
+    overflow: scroll;
+    max-width: 500px;
+    margin-bottom: 20px;
+}
+
+::-webkit-scrollbar {
+    display: none;
+}
+
+
+
+
