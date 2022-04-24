@@ -5,8 +5,12 @@
     height: 40px;
     padding: 5px;
     width: 100vw;
-    background-color: #caf0f8;
-    /* border: 1px solid black; */
+    background: linear-gradient(149deg, #90e0ef, #023e8a);
+    background-size: 200% 100%;
+    position: fixed;
+    top: 0;
+    z-index: 5;
+
 }
 
 
@@ -62,7 +66,8 @@
     height: 50px;
     width: 50px;
     background: linear-gradient(149deg, #90e0ef, #023e8a);
-    background-size: 500% 100%;
+    background-size: 400% 100%;
+    // background-color: #90e0ef  #023e8a;
     border-radius: 50%;
     z-index: 3;
     overflow: hidden;
@@ -105,6 +110,15 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    margin-right: 10px;
+}
+
+.search{
+  display:flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-right: 10px;
 }
 
 .login {

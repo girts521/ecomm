@@ -7,7 +7,7 @@ const CategoriesBar: React.FC = () => {
             <ul>
                 <li>Category 1</li>
                 <li>Category 2</li>
-                <li>Category 3</li>
+                <li> <a href="google.com">Category 3</a> </li>
                 <li>Category 4</li>
                 <li>Category 5</li>
                 <li>Category 6</li>
