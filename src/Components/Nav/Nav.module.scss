@@ -5,7 +5,7 @@
     height: 40px;
     padding: 5px;
     width: 100vw;
-    background: linear-gradient(149deg, #90e0ef, #023e8a);
+    background: linear-gradient(318deg, #f8f9fa, #e9ecef);
     background-size: 200% 100%;
     position: fixed;
     top: 0;
@@ -27,6 +27,7 @@
     transition-delay: 0.3s;
     transition-duration: 1s;
     transition-property: opacity, transform;
+    z-index: 2;
 }
 
 .burgerHidden {
@@ -65,9 +66,8 @@
     align-items: flex-start;
     height: 50px;
     width: 50px;
-    background: linear-gradient(149deg, #90e0ef, #023e8a);
+    background: linear-gradient(318deg,#adb5bd, #f8f9fa );
     background-size: 400% 100%;
-    // background-color: #90e0ef  #023e8a;
     border-radius: 50%;
     z-index: 3;
     overflow: hidden;
@@ -77,6 +77,7 @@
     position: absolute;
     top: 0;
     left: 0;
+    z-index: 5;
   }
   
   .open {
@@ -88,17 +89,39 @@
     border-radius: 0;
     padding: 0;
     margin: 0;
-    animation: AnimationName 5s ease 1;
+    animation: BackgroundColorChange 1s ease 1;
     animation-fill-mode: forwards;
   }
 
   .burgerLinks{
-      margin-top: 50px;  
+
+      margin-top: 50px;
+      margin-left: 10px;
+      width: 100%;
+     
 
       li {
-          padding: 7px;
+          padding: 10px;
+          width: 100%;
+      }
+
+      .moveUp{
+          animation: MoveUp 0.7s ease 1;
+          animation-fill-mode: forwards;
       }
   }
+
+  .backdrop{
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background-color: rgba(0,0,0,0.5);
+      z-index: 5;
+      animation: fadeIn 1s ease 1;
+  }
+  
 
 .brand{
     font-size: 16px;
@@ -136,15 +159,44 @@
     align-items: center;
 }
 
-@keyframes AnimationName {
+@keyframes BackgroundColorChange {
     0% {
       background-position: 9% 0%;
     }
+    25% {
+      background-position: 70% 80%;
+    }
     50% {
+      background-position: 82% 90%;
+    }
+    75% {
       background-position: 92% 100%;
     }
     100% {
-      background: linear-gradient(149deg, #90e0ef, #023e8a);
+      background: linear-gradient(310deg,#adb5bd, #f8f9fa );
       background-size: 100% 100%;
     }
   }
+
+  @keyframes MoveUp {
+    0% {
+      transform: translateY(400px);
+    }
+    50% {
+      transform: translateY(300px);
+    }
+    100% {
+      transform: translateY(0px);
+    }
+  }
+
+  @keyframes fadeIn {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+    
+  

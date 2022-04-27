@@ -1,58 +1,55 @@
-import React, { useRef, useEffect } from "react";
+import React, { useRef, useEffect, useState } from "react";
 import styles from "./Categories.module.scss";
 
 import Card from "../Card/Card";
 
 const Categories: React.FC = () => {
+
+  const [scrolling, setScrolling] = useState(true);
   const container = useRef<HTMLDivElement>(null);
-  let num = true;
-  const scroll = () => {
-    //scroll container to the right
-    container.current!.scrollBy({
-      top: 0,
-      left: 0.5,
-      behavior: "smooth",
-    });
-    if (num === true) {
-      setTimeout(scroll, 50);
-      //check if scroll is at the end of the container
-      if (
-        container.current!.scrollLeft + 5 >=
-        container.current!.scrollWidth - container.current!.offsetWidth
-      ) {
-        console.log("end");
-        //reset scroll
-        container.current!.scrollTo({
-          top: 0,
-          left: 0,
-          behavior: "auto",
-        });
-      }
-    } else {
-      return;
+
+  const handleScroll = () => {
+    if (scrolling === true) {
+      //scroll container to the right
+      container.current!.scrollBy({
+        top: 0,
+        left: 0.5,
+        behavior: "smooth",
+      });
+    }
+    //check if scroll is at the end of the container
+    if (
+      container.current!.scrollLeft + 5 >=
+      container.current!.scrollWidth - container.current!.offsetWidth
+    ) {
+      //reset scroll
+      container.current!.scrollTo({
+        top: 0,
+        left: 0,
+        behavior: "auto",
+      });
     }
   };
 
+  // keep scrolling every 50ms if scrolling is true and reset scroll if at the end of the container
   useEffect(() => {
-    scroll();
-  }, []);
+    if (scrolling === true) {
+      const interval = setInterval(handleScroll, 50);
+      return () => clearInterval(interval);
+    }
+  }, [scrolling]);
 
-  const stop = () => {
-    num = false;
-  };
-
-  const start = () => {
-    num = true;
-    scroll();
+  const stopScrolling = () => {
+    setScrolling(false);
   };
 
   return (
     <>
       <div
         ref={container}
-        onMouseEnter={stop}
-        onMouseLeave={start}
-        onPointerEnter={stop}
+        onClick={stopScrolling}
+        onMouseEnter={stopScrolling}
+        onPointerEnter={stopScrolling}
         className={styles.container}
       >
         <Card />

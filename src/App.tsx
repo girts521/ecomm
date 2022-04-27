@@ -34,10 +34,10 @@ const App: React.FC = () => {
 
 return (
  <div className={styles.container}>
-  <div className={`${fixed && styles.top}`}>
+ 
  <Nav />
  <CategoriesBar />
- </div>
+
  <Carousel />
  <Categories />
  <Deal />

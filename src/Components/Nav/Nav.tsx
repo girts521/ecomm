@@ -2,21 +2,25 @@ import React, { useState } from "react";
 import styles from "./Nav.module.scss";
 
 const Nav: React.FC = () => {
-  const [show, setShow] = useState(true);
+  const [show, setShow] = useState(false);
 
-  const showNav = () => {
-    setShow(!show);
-  };
+//change nav state on click
+const showNav = (state:boolean) => {
+   setShow(state);
+}
 
   return (
     <div className={styles.container}>
+      {show && <div onClick={() => showNav(false)} className={`${styles.backdrop} ${show && styles.backdropShow}`}></div>}
+
       <div
-        onClick={showNav}
-        className={`${styles.circle} ${show ? "" : styles.open}`}
+        
+        className={`${styles.circle} ${show && styles.open }`}
       >
         <svg
+        onClick={() => showNav(true)}
           className={`${styles.burger} ${
-            show ? styles.burgerShow : styles.burgerHidden
+            show ? styles.burgerHidden :  styles.burgerShow
           } `}
           xmlns="http://www.w3.org/2000/svg"
           version="1.1"
@@ -29,72 +33,72 @@ const Nav: React.FC = () => {
           <path d="M372.939,300.758H12.03c-6.641,0-12.03,5.39-12.03,12.03c0,6.641,5.39,12.03,12.03,12.03h360.909    c6.641,0,12.03-5.39,12.03-12.03C384.97,306.147,379.58,300.758,372.939,300.758z" />
         </svg>
 
-        <svg
-          className={`${styles.xHidden} ${show ? "" : styles.xOpen}`}
+       <div onClick={() => showNav(false)}> <svg
+          
+          className={`${styles.xHidden} ${show && styles.xOpen}`}
           xmlns="http://www.w3.org/2000/svg"
           width="24"
           height="24"
           viewBox="0 0 24 24"
           fill="none"
           stroke="currentColor"
-          stroke-width="2"
-          stroke-linecap="round"
-          stroke-linejoin="round"
+          strokeWidth="2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
         >
           <line x1="18" y1="6" x2="6" y2="18" />
           <line x1="6" y1="6" x2="18" y2="18" />
-        </svg>
-
-        {show ? (
-          ""
-        ) : (
-          <div className={styles.burgerLinks}>
-            <ul>
-              <li>
-                <a href="#">Home</a>
-              </li>
-              <li>
-                <a href="#">Category 1</a>
-              </li>
-              <li>
-                <a href="#">Category 2</a>
-              </li>
-              <li>
-                <a href="#">Category 3</a>
-              </li>
-              <li>
-                <a href="#">Category 4</a>
-              </li>
-              <li>
-                <a href="#">Category 5</a>
-              </li>
-              <li>
-                <a href="#">Category 6</a>
-              </li>
-              <li>
-                <a href="#">Category 7</a>
-              </li>
-              <li>
-                <a href="#">Category 8</a>
-              </li>
-              <li>
-                <a href="#">Category 9</a>
-              </li>
-              <li>
-                <a href="#">Category 10</a>
-              </li>
-              <li>
-                <a href="#">About</a>
-              </li>
-              <li>
-                <a href="#">Contact</a>
-              </li>
-              <li>
-                <a href="#">FAQ</a>
-              </li>
-            </ul>
-          </div>
-        )}
+        </svg></div>
+        {show &&
+          
+            <div className={styles.burgerLinks}>
+              <ul>
+                <li className={styles.moveUp}>
+                  <a href="#">Home</a>
+                </li>
+                <li className={styles.moveUp}>
+                  <a href="#">Category 1</a>
+                </li>
+                <li className={styles.moveUp}>
+                  <a href="#">Category 2</a>
+                </li>
+                <li className={styles.moveUp}>
+                  <a href="#">Category 3</a>
+                </li>
+                <li className={styles.moveUp}>
+                  <a href="#">Category 4</a>
+                </li>
+                <li className={styles.moveUp}>
+                  <a href="#">Category 5</a>
+                </li>
+                <li className={styles.moveUp}>
+                  <a href="#">Category 6</a>
+                </li>
+                <li className={styles.moveUp}>
+                  <a href="#">Category 7</a>
+                </li>
+                <li className={styles.moveUp}>
+                  <a href="#">Category 8</a>
+                </li>
+                <li className={styles.moveUp}>
+                  <a href="#">Category 9</a>
+                </li>
+                <li className={styles.moveUp}>
+                  <a href="#">Category 10</a>
+                </li>
+                <li className={styles.moveUp}>
+                  <a href="#">About</a>
+                </li>
+                <li className={styles.moveUp}>
+                  <a href="#">Contact</a>
+                </li>
+                <li className={styles.moveUp}>
+                  <a href="#">FAQ</a>
+                </li>
+              </ul>
+            </div>
+          
+        }
       </div>
       <div className={styles.brand}>My Brand Name</div>
       <div className={styles.right}>
