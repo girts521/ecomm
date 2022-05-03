@@ -6,5 +6,11 @@
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
+
+    @media (min-width: 768px) {
+        height: 380px;
+        width: 90vw;
+        margin: 0 auto 60px;
+    }
     
 }

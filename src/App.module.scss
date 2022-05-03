@@ -1,22 +1,5 @@
 
-
 .container {
     background: linear-gradient(318deg, #f8f9fa, #e9ecef);
     background-size: 200% 200%;
-}
-
-@-webkit-keyframes AnimationName {
-    0%{background-position:14% 0%}
-    50%{background-position:87% 100%}
-    100%{background-position:14% 0%}
-}
-@-moz-keyframes AnimationName {
-    0%{background-position:14% 0%}
-    50%{background-position:87% 100%}
-    100%{background-position:14% 0%}
-}
-@keyframes AnimationName {
-    0%{background-position:14% 0%}
-    50%{background-position:87% 100%}
-    100%{background-position:14% 0%}
 }

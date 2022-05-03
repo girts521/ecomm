@@ -4,12 +4,16 @@
     align-items: center;
     height: 40px;
     padding: 5px;
-    width: 100vw;
+    min-width: 100%;
     background: linear-gradient(318deg, #f8f9fa, #e9ecef);
     background-size: 200% 100%;
     position: fixed;
     top: 0;
     z-index: 5;
+
+    @media (min-width: 768px) {
+        justify-content: space-between;
+    }
 
 }
 
@@ -78,6 +82,12 @@
     top: 0;
     left: 0;
     z-index: 5;
+
+    @media (min-width: 768px) {
+        display: none;
+    }
+      
+    
   }
   
   .open {
@@ -98,8 +108,12 @@
       margin-top: 50px;
       margin-left: 10px;
       width: 100%;
-     
 
+      @for $i from 1 through 15 {
+        ul :nth-child(#{$i}n) {
+            animation-duration: #{($i/10)}s;
+        }
+    }
       li {
           padding: 10px;
           width: 100%;
@@ -127,6 +141,17 @@
     font-size: 16px;
     font-weight: 700;
     margin-right: 40px;
+
+    @media (min-width: 768px) {
+        margin-right: 0;
+        margin-left: 20px;
+        font-size: large;
+    }
+
+    @media (min-width: 1024px) {
+        font-size: x-large;
+        margin-left: 40px;
+    }
 }
 
 .right{
@@ -134,6 +159,16 @@
     justify-content: center;
     align-items: center;
     margin-right: 10px;
+
+    @media (min-width: 768px) {
+      margin-left: 0;
+      margin-right: 20px;
+      width: 100px;
+
+      div{
+        margin-right: 20px;
+      }
+  }
 }
 
 .search{

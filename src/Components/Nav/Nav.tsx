@@ -4,23 +4,25 @@ import styles from "./Nav.module.scss";
 const Nav: React.FC = () => {
   const [show, setShow] = useState(false);
 
-//change nav state on click
-const showNav = (state:boolean) => {
-   setShow(state);
-}
+  //change nav state on click
+  const showNav = (state: boolean) => {
+    setShow(state);
+  };
 
   return (
     <div className={styles.container}>
-      {show && <div onClick={() => showNav(false)} className={`${styles.backdrop} ${show && styles.backdropShow}`}></div>}
+      {show && (
+        <div
+          onClick={() => showNav(false)}
+          className={`${styles.backdrop} ${show && styles.backdropShow}`}
+        ></div>
+      )}
 
-      <div
-        
-        className={`${styles.circle} ${show && styles.open }`}
-      >
+      <div className={`${styles.circle} ${show && styles.open}`}>
         <svg
-        onClick={() => showNav(true)}
+          onClick={() => showNav(true)}
           className={`${styles.burger} ${
-            show ? styles.burgerHidden :  styles.burgerShow
+            show ? styles.burgerHidden : styles.burgerShow
           } `}
           xmlns="http://www.w3.org/2000/svg"
           version="1.1"
@@ -33,72 +35,71 @@ const showNav = (state:boolean) => {
           <path d="M372.939,300.758H12.03c-6.641,0-12.03,5.39-12.03,12.03c0,6.641,5.39,12.03,12.03,12.03h360.909    c6.641,0,12.03-5.39,12.03-12.03C384.97,306.147,379.58,300.758,372.939,300.758z" />
         </svg>
 
-       <div onClick={() => showNav(false)}> <svg
-          
-          className={`${styles.xHidden} ${show && styles.xOpen}`}
-          xmlns="http://www.w3.org/2000/svg"
-          width="24"
-          height="24"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="2"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        >
-          <line x1="18" y1="6" x2="6" y2="18" />
-          <line x1="6" y1="6" x2="18" y2="18" />
-        </svg></div>
-        {show &&
-          
-            <div className={styles.burgerLinks}>
-              <ul>
-                <li className={styles.moveUp}>
-                  <a href="#">Home</a>
-                </li>
-                <li className={styles.moveUp}>
-                  <a href="#">Category 1</a>
-                </li>
-                <li className={styles.moveUp}>
-                  <a href="#">Category 2</a>
-                </li>
-                <li className={styles.moveUp}>
-                  <a href="#">Category 3</a>
-                </li>
-                <li className={styles.moveUp}>
-                  <a href="#">Category 4</a>
-                </li>
-                <li className={styles.moveUp}>
-                  <a href="#">Category 5</a>
-                </li>
-                <li className={styles.moveUp}>
-                  <a href="#">Category 6</a>
-                </li>
-                <li className={styles.moveUp}>
-                  <a href="#">Category 7</a>
-                </li>
-                <li className={styles.moveUp}>
-                  <a href="#">Category 8</a>
-                </li>
-                <li className={styles.moveUp}>
-                  <a href="#">Category 9</a>
-                </li>
-                <li className={styles.moveUp}>
-                  <a href="#">Category 10</a>
-                </li>
-                <li className={styles.moveUp}>
-                  <a href="#">About</a>
-                </li>
-                <li className={styles.moveUp}>
-                  <a href="#">Contact</a>
-                </li>
-                <li className={styles.moveUp}>
-                  <a href="#">FAQ</a>
-                </li>
-              </ul>
-            </div>
-          
-        }
+        <div onClick={() => showNav(false)}>
+          <svg
+            className={`${styles.xHidden} ${show && styles.xOpen}`}
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          >
+            <line x1="18" y1="6" x2="6" y2="18" />
+            <line x1="6" y1="6" x2="18" y2="18" />
+          </svg>
+        </div>
+        {show && (
+          <div className={styles.burgerLinks}>
+            <ul>
+              <li className={styles.moveUp}>
+                <a href="#">Home</a>
+              </li>
+              <li className={styles.moveUp}>
+                <a href="#">Category 1</a>
+              </li>
+              <li className={styles.moveUp}>
+                <a href="#">Category 2</a>
+              </li>
+              <li className={styles.moveUp}>
+                <a href="#">Category 3</a>
+              </li>
+              <li className={styles.moveUp}>
+                <a href="#">Category 4</a>
+              </li>
+              <li className={styles.moveUp}>
+                <a href="#">Category 5</a>
+              </li>
+              <li className={styles.moveUp}>
+                <a href="#">Category 6</a>
+              </li>
+              <li className={styles.moveUp}>
+                <a href="#">Category 7</a>
+              </li>
+              <li className={styles.moveUp}>
+                <a href="#">Category 8</a>
+              </li>
+              <li className={styles.moveUp}>
+                <a href="#">Category 9</a>
+              </li>
+              <li className={styles.moveUp}>
+                <a href="#">Category 10</a>
+              </li>
+              <li className={styles.moveUp}>
+                <a href="#">About</a>
+              </li>
+              <li className={styles.moveUp}>
+                <a href="#">Contact</a>
+              </li>
+              <li className={styles.moveUp}>
+                <a href="#">FAQ</a>
+              </li>
+            </ul>
+          </div>
+        )}
       </div>
       <div className={styles.brand}>My Brand Name</div>
       <div className={styles.right}>
@@ -113,7 +114,7 @@ const showNav = (state:boolean) => {
             height="24px"
             viewBox="0 0 24 24"
             width="24px"
-            fill="#000000"
+            fill="#000000" 
           >
             <path d="M0 0h24v24H0z" fill="none" />
             <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z" />

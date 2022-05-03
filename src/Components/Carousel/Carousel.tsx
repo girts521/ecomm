@@ -1,6 +1,6 @@
 import React, {useRef} from "react";
 import { useState, useEffect } from "react";
-import styles from "./Carousel.module.css";
+import styles from "./Carousel.module.scss";
 import { motion, AnimatePresence } from "framer-motion";
 import { wrap } from "popmotion";
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
@@ -56,7 +56,7 @@ const Carousel: React.FC = () => {
           }
         }, 3000);
         return () => clearInterval(interval);
-    }, [page]);
+    }, [page]); 
 
 
   return (

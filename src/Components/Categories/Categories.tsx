@@ -45,7 +45,7 @@ const Categories: React.FC = () => {
 
   return (
     <>
-      <div
+      <div 
         ref={container}
         onClick={stopScrolling}
         onMouseEnter={stopScrolling}

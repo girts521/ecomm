@@ -16,7 +16,7 @@ const Products: React.FC = () => {
         <ProductCard />
         <ProductCard />
         </div>
-    );
+    ); 
     };
 
     export default Products;
