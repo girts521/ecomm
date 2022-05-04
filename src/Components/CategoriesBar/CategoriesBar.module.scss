@@ -23,6 +23,12 @@
         li{
             padding: 7px;
             min-width: 80px;
+
+            @media (min-width: 1024px) {
+                font-size: 18px;
+            }
+                
+            
             
         }
     }

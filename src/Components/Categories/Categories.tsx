@@ -3,7 +3,7 @@ import styles from "./Categories.module.scss";
 
 import Card from "../Card/Card";
 
-const Categories: React.FC = () => {
+const Categories: React.FC<{heading: String}> = ({heading}) => {
 
   const [scrolling, setScrolling] = useState(true);
   const container = useRef<HTMLDivElement>(null);
@@ -13,7 +13,7 @@ const Categories: React.FC = () => {
       //scroll container to the right
       container.current!.scrollBy({
         top: 0,
-        left: 0.5,
+        left: 1,
         behavior: "smooth",
       });
     }
@@ -42,16 +42,39 @@ const Categories: React.FC = () => {
   const stopScrolling = () => {
     setScrolling(false);
   };
+  const startScrolling = () => {
+    setScrolling(true);
+  };
 
   return (
     <>
+    <h1 className={styles.heading}>{heading}</h1>
       <div 
         ref={container}
         onClick={stopScrolling}
         onMouseEnter={stopScrolling}
+        onMouseLeave={startScrolling}
         onPointerEnter={stopScrolling}
         className={styles.container}
       >
+       
+        <Card />
+        <Card />
+        <Card />
+        <Card />
+        <Card />
+        <Card />
+        <Card />
+        <Card />
+        <Card />
+        <Card />
+        <Card />
+        <Card />
+        <Card />
+        <Card />
+        <Card />
+        <Card />
+        <Card />
         <Card />
         <Card />
         <Card />

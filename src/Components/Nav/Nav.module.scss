@@ -106,12 +106,12 @@
   .burgerLinks{
 
       margin-top: 50px;
-      margin-left: 10px;
+      margin-left: 10px; 
       width: 100%;
 
       @for $i from 1 through 15 {
         ul :nth-child(#{$i}n) {
-            animation-duration: #{($i/10)}s;
+            animation-duration: #{($i/8)}s;
         }
     }
       li {
@@ -120,7 +120,7 @@
       }
 
       .moveUp{
-          animation: MoveUp 0.7s ease 1;
+          animation: MoveUp 0.1s ease 0.2s;
           animation-fill-mode: forwards;
       }
   }
@@ -141,6 +141,7 @@
     font-size: 16px;
     font-weight: 700;
     margin-right: 40px;
+    animation: fadeIn 0.7s ease;
 
     @media (min-width: 768px) {
         margin-right: 0;
@@ -160,10 +161,30 @@
     align-items: center;
     margin-right: 10px;
 
+    svg {
+      cursor: pointer;
+    }
+
+    .searchInput{
+      margin-right: 7px;
+      animation: fadeIn 0.7s ease;
+
+      input {
+        border: transparent;
+        border-radius: 15px;
+        height: 20px;
+        padding: 5px;
+        outline: none;
+        // color: #f8f9fa;
+        // outline-color:#f8f9fa;
+        background-color: #adb5bd;
+      }
+    }
+
     @media (min-width: 768px) {
       margin-left: 0;
       margin-right: 20px;
-      width: 100px;
+      // width: 100px;
 
       div{
         margin-right: 20px;
