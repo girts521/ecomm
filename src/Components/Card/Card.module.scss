@@ -1,0 +1,49 @@
+.card{
+    height: 100%;
+    min-width: 150px;
+    // border: 1px solid black;
+    margin-right: 15px;
+    margin-left: 5px;
+
+    @media (min-width: 1024px) {
+        margin-right: 25px;
+    }
+    
+}
+
+.card:last-child{
+    // background-color: red;
+    margin-right: 50px;
+
+    @media (min-width: 768px) {
+        margin-right: 0px;
+    }
+}
+
+.cardImage{
+    height: 70%;
+
+    img{
+        height: 100%;
+        width: 100%;
+    }
+}
+
+
+.cardContent{
+    margin-top: 5px;
+
+    p{
+        margin-bottom: 7px;
+
+        @media (min-width: 1024px) {
+            font-size: 18px;
+        }
+            
+        
+    }
+}
+
+.cardContent :first-child{
+    font-weight: bold;
+}
