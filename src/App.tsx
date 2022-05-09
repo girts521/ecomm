@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from "react";
+import { Routes, Route } from "react-router-dom";
+
 import "./reset.css";
 import styles from "./App.module.scss";
 import Nav from "./Components/Nav/Nav";
