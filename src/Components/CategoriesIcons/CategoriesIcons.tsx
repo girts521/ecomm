@@ -1,70 +1,65 @@
 import React from "react";
-import styles from "./CategoriesIcons.module.scss";
+import { Heading, CategoriesContainer, Category } from "./styles";
 
 const CategoriesIcons: React.FC = () => {
+  return (
+    <>
+      <Heading>Select a category to browse</Heading>
 
-    return (
-        <div className={styles.container}> 
-            <h1>Select a category to browse</h1>
-            <div className={styles.categories}>
+        <CategoriesContainer>
 
-            <div className={styles.category}>
-                <img src='t-shirt.png' alt="t-shirt" />
-                T-shirts 
-            </div>
+        <Category>
+          <img src="t-shirt.png" alt="t-shirt" />
+          T-shirts
+        </Category>
 
-            <div className={styles.category}>
-                <img src='jeans.png' alt="t-shirt" />
-                Jeans 
-            </div>
+        <Category>
+          <img src="jeans.png" alt="t-shirt" />
+          Jeans
+        </Category>
 
-            <div className={styles.category}>
-                <img src='hoodie.png' alt="t-shirt" />
-                Hoodies
-            </div>
+        <Category>
+          <img src="hoodie.png" alt="t-shirt" />
+          Hoodies
+        </Category>
 
-            <div className={styles.category}>
-                <img src='shirt.png' alt="t-shirt" />
-                Shirts 
-            </div>
+        <Category>
+          <img src="shirt.png" alt="t-shirt" />
+          Shirts
+        </Category>
 
-            <div className={styles.category}>
-                <img src='sneakers.png' alt="t-shirt" />
-                Sneakers 
-            </div>
+        <Category>
+          <img src="sneakers.png" alt="t-shirt" />
+          Sneakers
+        </Category>
 
-            <div className={styles.category}>
-                <img src='high-heel.png' alt="t-shirt" />
-                Womens shoes
-            </div>
+        <Category>
+          <img src="high-heel.png" alt="t-shirt" />
+          Womens shoes
+        </Category>
 
-            <div className={styles.category}>
-                <img src='bluse.png' alt="t-shirt" />
-                Blouses
-            </div>
+        <Category>
+          <img src="bluse.png" alt="t-shirt" />
+          Blouses
+        </Category>
 
-            <div className={styles.category}>
-                <img src='skirt.png' alt="t-shirt" />
-                Skirts 
-            </div>
+        <Category>
+          <img src="skirt.png" alt="t-shirt" />
+          Skirts
+        </Category>
 
-            <div className={styles.category}>
-                <img src='dress.png' alt="t-shirt" />
-                Dresses
-            </div>
+        <Category>
+          <img src="dress.png" alt="t-shirt" />
+          Dresses
+        </Category>
 
-            <div className={styles.category}>
-                <img src='sportswear.png' alt="t-shirt" />
-                Sportswear 
-            </div>
-
-
-
-            </div>
-        </div>
-
-    )
-
-}
+        <Category>
+          <img src="sportswear.png" alt="t-shirt" />
+          Sportswear
+        </Category>
+        </CategoriesContainer>
+    </>
+  );
+};
 
 export default CategoriesIcons;

@@ -1,10 +1,12 @@
 import React from "react";
-import styles from "./Products.module.scss";
+// import styles from "./Products.module.scss";
+import {Container} from "./ProductsStyles"
 import ProductCard from "./ProductCard";
+
 
 const Products: React.FC = () => {
     return (
-        <div className={styles.container}>
+        <Container>
         <ProductCard />
         <ProductCard />
         <ProductCard />
@@ -12,10 +14,10 @@ const Products: React.FC = () => {
         <ProductCard />
         <ProductCard />
         <ProductCard />
+        <ProductCard /> 
         <ProductCard />
         <ProductCard />
-        <ProductCard />
-        </div>
+        </Container>
     ); 
     };
 
