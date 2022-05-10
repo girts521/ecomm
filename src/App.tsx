@@ -18,6 +18,7 @@ const Container = styled.main`
     background-size: 200% 200%;
 `;
 
+
 const App: React.FC = () => {
   return (
       <Container>

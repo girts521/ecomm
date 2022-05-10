@@ -1,5 +1,6 @@
 import React, { useRef, useEffect, useState } from "react";
-import styles from "./Categories.module.scss";
+// import styles from "./Categories.module.scss";
+import { Heading, Container } from "./style";
 
 import Card from "../Card/Card";
 
@@ -48,16 +49,15 @@ const Categories: React.FC<{heading: String}> = ({heading}) => {
 
   return (
     <>
-    <h1 className={styles.heading}>{heading}</h1>
-      <div 
-        ref={container}
-        onClick={stopScrolling}
+      <Heading>{heading}</Heading>
+    
+      <Container 
+      ref={container}
+      onClick={stopScrolling}
         onMouseEnter={stopScrolling}
         onMouseLeave={startScrolling}
         onPointerEnter={stopScrolling}
-        className={styles.container}
       >
-       
         <Card />
         <Card />
         <Card />
@@ -81,7 +81,8 @@ const Categories: React.FC<{heading: String}> = ({heading}) => {
         <Card />
         <Card />
         <Card />
-      </div>
+      
+        </Container>
     </>
   );
 };

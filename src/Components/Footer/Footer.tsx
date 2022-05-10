@@ -1,12 +1,12 @@
 import React from "react";
-import styles from "./Footer.module.scss";
+import { Container } from "./styles";
 
 const Footer: React.FC = () => {
-    return (
-        <div className={styles.container}>
-        <h1>Footer</h1>
-        </div>
-    )
-}
+  return (
+    <Container>
+      <h1>Footer</h1>
+    </Container>
+  );
+};
 
 export default Footer;

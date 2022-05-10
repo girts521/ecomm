@@ -42,5 +42,5 @@ export const Arrow = styled.div<{prev?: Boolean, next?: Boolean}>`
   align-items: flex-end;
 
   ${(props) => props.prev && "left: 0;  transform: scale(-1);"}
-  ${(props) => props.prev && "right: 0;"}
+  ${(props) => props.next && "right: 0;"}
 `;

@@ -1,13 +1,13 @@
 import React from "react";
-import styles from "./Deal.module.scss";
+import {Header, Banner} from "./styles";
 
-const Deal: React.FC<{header: String}> = ({header}) => {
-    return (
-        <div className={styles.container}>
-            <h1 className={styles.header}>{header}</h1>
-            <div className={styles.banner}></div> 
-        </div>
-    )
-}
+const Deal: React.FC<{ header: String }> = ({ header }) => {
+  return (
+    <>
+        <Header>{header}</Header>
+        <Banner />
+    </>
+  );
+};
 
 export default Deal;
