@@ -24,7 +24,7 @@ const Nav: React.FC = () => {
   const showSearchBar = () => {
     setShowSearch(!showSearch);
     if (window.innerWidth < 768) {
-      setShowBrand(!showBrand);
+      setShowBrand(!showBrand); 
     }
   };
 

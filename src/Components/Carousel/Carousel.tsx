@@ -1,6 +1,7 @@
 import React, {useRef} from "react";
 import { useState, useEffect } from "react";
-import styles from "./Carousel.module.scss";
+// import styles from "./Carousel.module.scss";
+import {Container, Arrow} from './styles';
 import { motion, AnimatePresence } from "framer-motion";
 import { wrap } from "popmotion";
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
@@ -9,7 +10,7 @@ import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 const variants = {
     enter: (direction: number) => {
       return {
-        x: direction > 0 ? 500 : -500,
+        x: direction > 0 ? 500 : -500, 
         opacity: 0
       };
     },
@@ -60,13 +61,14 @@ const Carousel: React.FC = () => {
 
 
   return (
-    <div ref={containerRef} className={styles.container}>
+
+    <Container ref={containerRef}>
 
 <AnimatePresence initial={false} custom={direction}>
         <motion.img
           key={page}
           src={images[imageIndex]}
-          custom={direction}
+          custom={direction} 
           variants={variants}
           initial="enter"
           animate="center"
@@ -77,17 +79,18 @@ const Carousel: React.FC = () => {
           }}
         />
       </AnimatePresence>
-      
-      <div className={styles.next} onClick={() => paginate(1)}>
-     
-        <ArrowForwardIosIcon />
-      </div>
-      <div className={styles.prev} onClick={() => paginate(-1)}>
-       <ArrowForwardIosIcon />
+      <div>
+      <Arrow next onClick={() => paginate(1)}>
+      <ArrowForwardIosIcon />
+      </Arrow>
 
+      <Arrow prev onClick={() => paginate(-1)}>
+      <ArrowForwardIosIcon />
+      </Arrow>
       </div>
 
-    </div>
+
+    </Container>
   );
 };
 
