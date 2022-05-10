@@ -79,7 +79,7 @@ const Carousel: React.FC = () => {
           }}
         />
       </AnimatePresence>
-      <div>
+
       <Arrow next onClick={() => paginate(1)}>
       <ArrowForwardIosIcon />
       </Arrow>
@@ -87,7 +87,7 @@ const Carousel: React.FC = () => {
       <Arrow prev onClick={() => paginate(-1)}>
       <ArrowForwardIosIcon />
       </Arrow>
-      </div>
+
 
 
     </Container>
