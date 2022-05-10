@@ -1,5 +1,4 @@
 import React from "react";
-// import styles from "./Products.module.scss";
 import {Container} from "./ProductsStyles"
 import ProductCard from "./ProductCard";
 
