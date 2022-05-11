@@ -21,6 +21,7 @@ const App: React.FC = () => {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/cart" element={<Cart />} />
+        <Route path="/product/:categoryName/:productName" element={<Product />} />
         <Route path="*" element={<div>Not Found</div>} />
       </Routes>
       </Container>
