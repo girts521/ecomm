@@ -6,5 +6,9 @@ export const Container = styled.div`
     margin: auto;
     margin-bottom: 30px;
     margin-top:0;
-    /* border: 1px solid red; */
+
+    @media (min-width: 768px) {
+        width: 50%;
+        margin-left: 5%;
+    }
 `;

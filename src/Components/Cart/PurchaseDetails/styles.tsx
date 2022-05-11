@@ -9,6 +9,12 @@ export const Container = styled.div`
   bottom: 0;
   padding: 10px;
 
+  @media (min-width: 768px) {
+      position: relative;
+      width: 50%;
+      margin-right: 5%;
+  }
+
   h2{
     font-size: 1.5rem;
     margin-bottom: 10px;
@@ -27,5 +33,10 @@ export const Container = styled.div`
     margin-top: 20px;
     margin-bottom: 10px;
     cursor: pointer;
+
+    &:hover {
+        opacity: 0.8;
+        transform: scale(1.01);
+    }
   }
 `;
