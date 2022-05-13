@@ -34,7 +34,7 @@ const Quantity: React.FC = () => {
     return (
         <Container>
         <button onClick={subtractQuantity}>-</button>
-        <input type="number" min={1} value={quantity} />
+        <input type="number" min={1} defaultValue={quantity} />
         <button onClick={addQuantity}>+</button>
         </ Container>
     )
