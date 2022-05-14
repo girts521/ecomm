@@ -12,8 +12,9 @@ export const Container = styled.div`
     border-radius: 5px;
 
     input{
-        width: 10px;
+        width: 30px;
         border: none;
+        padding: 0;
     }
 
     button{
@@ -21,5 +22,10 @@ export const Container = styled.div`
     width: 30px;
     border: none;
     background-color: #f8f9fa;
+
+    :hover{
+        background-color: #e9ecef;
+        cursor: pointer;
+    }
     }
 `;

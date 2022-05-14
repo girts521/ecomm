@@ -1,5 +1,5 @@
 import React from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import {Container} from "./styles";
 
 const Quantity: React.FC = () => {
@@ -12,6 +12,7 @@ const Quantity: React.FC = () => {
             //if quantity is less than 10, add 1 to quantity
             if (quantity < 10) {
             setQuantity(quantity + 1);
+        
             }
             else{
                 return
@@ -26,15 +27,17 @@ const Quantity: React.FC = () => {
             }
             //else subtract
             else{
-                setQuantity(quantity - 1);
+                setQuantity(quantity - 1); 
             }
         }
-    
+
+
+
 
     return (
         <Container>
         <button onClick={subtractQuantity}>-</button>
-        <input type="number" min={1} defaultValue={quantity} />
+        <input type="number" readOnly min={1} max={10} value={quantity} />
         <button onClick={addQuantity}>+</button>
         </ Container>
     )
