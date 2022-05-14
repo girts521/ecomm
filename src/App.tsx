@@ -2,12 +2,12 @@ import React, { useState, useEffect } from "react";
 import { Routes, Route } from "react-router-dom";
 
 import "./reset.css";
-// import styles from "./App.module.scss";
 import styled from "styled-components";
 import Nav from "./Components/Nav/Nav";
 import Home from "./Pages/Home";
 import Cart from "./Pages/Cart";
 import Product from "./Pages/Product";
+import Wishlist from "./Pages/Wishlist/Wishlist";
 
 const Container = styled.main`
     background: linear-gradient(318deg, #f8f9fa, #e9ecef);
@@ -23,6 +23,7 @@ const App: React.FC = () => {
         <Route path="/" element={<Home />} />
         <Route path="/cart" element={<Cart />} />
         <Route path="/:categoryName/:productName" element={<Product />} />
+        <Route path="/wishlist" element={<Wishlist />} />
         <Route path="*" element={<div>Not Found</div>} />
       </Routes>
       </Container>

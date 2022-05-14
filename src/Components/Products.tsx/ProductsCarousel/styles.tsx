@@ -18,10 +18,11 @@ export const Container = styled.div`
 
   @media (min-width: 768px) {
     height: 60vh;
+    /* max-width: 80vw; */
 
-    img {
+    /* img {
       height: 80%;
-    }
+    } */
   }
 `;
 

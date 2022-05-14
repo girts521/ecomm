@@ -8,7 +8,7 @@ import {
   SmallInfo,
   Size,
   Sizes
-} from "./ProductStyles";
+} from "./ProductStyles"; 
 
 import ProductsCarousel from "../Components/Products.tsx/ProductsCarousel/ProductsCarousel";
 import Quantity from "../Components/Cart/Quantity/Quantity";
@@ -16,8 +16,7 @@ import Quantity from "../Components/Cart/Quantity/Quantity";
 const Product: React.FC = () => {
   const { productName, categoryName } = useParams();
 
-  const [selected, setSelected] = useState(Number);
-
+  const [selected, setSelected] = useState(Number); 
   let select = false;
 
 
