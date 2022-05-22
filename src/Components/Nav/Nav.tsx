@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   NavContainer,
   Backdrop,
@@ -8,12 +8,29 @@ import {
   Login,
   Cart,
 } from "./styles";
+import { useSelector } from 'react-redux';
 import NavMenu from "./NavMenu";
+
+type AuthState = {
+  auth:{
+  isLoggedIn: boolean;
+    user: {
+      id: string;
+      firstName: string;
+      email: string;
+      lastName: string;
+      isAdmin: boolean;
+    }
+  
+  }
+}
 
 const Nav: React.FC = () => {
   const [show, setShow] = useState(false);
   const [showSearch, setShowSearch] = useState(false);
   const [showBrand, setShowBrand] = useState(true);
+  const [showLogin, setShowLogin] = useState(false);
+  const [username, setUsername] = useState('');
 
   //change nav state on click
   const showNav = (state: boolean) => {
@@ -28,13 +45,27 @@ const Nav: React.FC = () => {
     }
   };
 
+  const user = useSelector((state: AuthState) => state.auth.user);
+
+
+  useEffect(() => {
+    console.log(user)
+    console.log(typeof(username))
+    if(user){
+      console.log('user: ', user.firstName);
+      setUsername(user.firstName);
+      setShowLogin(true)
+    }
+  } , [user, username]);
+
+
   return (
     <NavContainer>
       {show && <Backdrop onClick={() => showNav(false)} />}
 
       <NavMenu show={show} setShow={setShow} />
 
-      {showBrand ? <Brand> My Brand Name</Brand> : ""}
+      {showBrand ? <Brand>{showLogin ? username : 'My Brand Name'}</Brand> : ""}
 
       <RightNav>
         {showSearch && (
