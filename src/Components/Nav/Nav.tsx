@@ -10,27 +10,31 @@ import {
 } from "./styles";
 import { useSelector } from 'react-redux';
 import NavMenu from "./NavMenu";
+import { useNavigate } from "react-router-dom";
 
 type AuthState = {
   auth:{
-  isLoggedIn: boolean;
+    isLoggedIn: boolean;
     user: {
       id: string;
       firstName: string;
       email: string;
       lastName: string;
       isAdmin: boolean;
+      cart: string[]
     }
   
   }
 }
 
+
 const Nav: React.FC = () => {
   const [show, setShow] = useState(false);
   const [showSearch, setShowSearch] = useState(false);
   const [showBrand, setShowBrand] = useState(true);
-  const [showLogin, setShowLogin] = useState(false);
   const [username, setUsername] = useState('');
+
+  const navigate = useNavigate();
 
   //change nav state on click
   const showNav = (state: boolean) => {
@@ -49,12 +53,9 @@ const Nav: React.FC = () => {
 
 
   useEffect(() => {
-    console.log(user)
-    console.log(typeof(username))
-    if(user){
+    if(user.firstName.length > 0){
       console.log('user: ', user.firstName);
       setUsername(user.firstName);
-      setShowLogin(true)
     }
   } , [user, username]);
 
@@ -65,7 +66,7 @@ const Nav: React.FC = () => {
 
       <NavMenu show={show} setShow={setShow} />
 
-      {showBrand ? <Brand>{showLogin ? username : 'My Brand Name'}</Brand> : ""}
+      {showBrand ? <Brand onClick={() => navigate('/') }>My Brand Name</Brand> : ""}
 
       <RightNav>
         {showSearch && (
@@ -97,7 +98,7 @@ const Nav: React.FC = () => {
           </svg>
         </Login>
 
-        <Cart>
+        <Cart onClick={()=> navigate('/cart')}>
           <svg
             xmlns="http://www.w3.org/2000/svg"
             height="24px"

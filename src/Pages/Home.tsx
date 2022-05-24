@@ -44,26 +44,20 @@ const Home: React.FC = () => {
     })
     .then(res => res.json())
     .then(data => {
-      console.log(data);
       if(data.isLoggedIn){
         dispatch(authActions.login());
         dispatch(authActions.setUser(data.loggedUser));
-      }
-
-      
+      } 
     })
     .catch(err => {
       console.log(err);
     });
-
-   
-
   } , []);
 
   const check = () => {
 
     //logout
-    let url = `/logout`;
+    let url = `/products`;
     fetch(url,{
       credentials: 'include',
       method: 'GET'
@@ -76,14 +70,12 @@ const Home: React.FC = () => {
       console.log(err);
     });
 
-    // console.log('isLoggedIn: ',isAuth);
-    // console.log('user: ',user);
   }
 
 
   return (
     <>
-      <CategoriesBar />
+      {/* <CategoriesBar /> */}
       <Carousel />
       <button onClick={check}>check</button>
       <CategoriesIcons />

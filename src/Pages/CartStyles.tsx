@@ -7,7 +7,7 @@ flex-direction: column;
 /* justify-content: center; */
 padding-bottom: 100px;
 
-@media (min-width: 768px) {
+@media (min-width: 768px) { 
     padding-bottom: 50px;
 }
 

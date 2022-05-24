@@ -4,10 +4,11 @@ type AuthState = {
     isLoggedIn: boolean;
     user: {
       id: string;
-      name: string;
+      firstName: string;
       email: string;
-      surname: string;
+      lastName: string;
       isAdmin: boolean;
+      cart: string[]
     }
 }
 
@@ -15,10 +16,11 @@ const initialAuthState: AuthState  = {
     isLoggedIn: false,
     user: {
       id: '',
-      name: '',
+      firstName: '',
       email: '',
-      surname: '',
-      isAdmin: false
+      lastName: '',
+      isAdmin: false,
+      cart: []
     }
   };
   
