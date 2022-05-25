@@ -2,21 +2,29 @@ import React, {useState} from "react";
 import { Container, ProductInfo } from "./styles";
 import Quantity from "../../Quantity/Quantity";
 
-const CardSummaryCard: React.FC = () => {
+type Item = {
+    product_id: string;
+    product_name: string;
+    price: string;
+    quantity: number;
+    product_img: string;
+    user_id: number;
+    session_id: string;
+  };
 
+
+const CardSummaryCard: React.FC<{item: Item }> = ({item}) => {
 
     return (
         <Container>
-        <img src="https://via.placeholder.com/150" alt="product" />
+        <img src={item.product_img} alt="product" />
         <ProductInfo>
-        <h1>Product Name</h1>
-        <h2>Product Price</h2>
-        <h3>Product Quantity</h3> 
+        <h1>{item.product_name}</h1>
+        <h2>{item.price}</h2>
+        <h3>{item.quantity}</h3> 
 
-        <Quantity />
-
+        <Quantity product_id={item.product_id}/>
         </ProductInfo>
-
         </Container>
     )
 };
