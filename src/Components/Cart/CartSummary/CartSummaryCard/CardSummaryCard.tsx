@@ -23,7 +23,7 @@ const CardSummaryCard: React.FC<{item: Item }> = ({item}) => {
         <h2>{item.price}</h2>
         <h3>{item.quantity}</h3> 
 
-        <Quantity />
+        <Quantity product_id={item.product_id}/>
         </ProductInfo>
         </Container>
     )

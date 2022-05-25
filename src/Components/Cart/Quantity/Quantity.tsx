@@ -1,8 +1,43 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import {Container} from "./styles";
+import { useDispatch, useSelector } from "react-redux";
+import { cartActions } from "../../../store/cart";
 
-const Quantity: React.FC = () => {
+type AuthState = {
+    isLoggedIn: boolean;
+    user: {
+      id: string;
+      firstName: string;
+      email: string;
+      lastName: string;
+      isAdmin: boolean;
+      cart: string[];
+    };
+  };
+  
+  type Item = {
+    product_id: string;
+    product_name: string;
+    price: string;
+    quantity: number;
+    product_img: string;
+    user_id: number;
+    session_id: string;
+  };
+  
+  type CartState = Item[];
+  
+  type State = {
+    cart: CartState;
+    auth: AuthState;
+  };
+
+
+const Quantity: React.FC<{product_id?: string}> = (product_id) => {
+    const dispatch = useDispatch();
+    const cartData = useSelector((state: State) => state.cart);
+
 
         //state for product quantity
         const [quantity, setQuantity] = useState(1);
@@ -23,6 +58,32 @@ const Quantity: React.FC = () => {
         const subtractQuantity = () => {
             //if quantity is 1, do not subtract
             if (quantity === 1) {
+                if(product_id){
+
+                //delete item from cart
+
+                const url = '/deleteItem';
+                fetch(url, {
+                    method: 'POST',
+                    credentials: 'include',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        Credentials: 'include'
+                    },
+                    body: JSON.stringify({
+                        product_id: product_id.product_id
+                    })
+                })
+                .then(res => res.json())
+                .then(data => {
+                    console.log(data);
+                    dispatch(cartActions.removeFromCart(product_id));
+                    console.log('updated cartData',cartData)
+                })
+                .catch(err => {
+                    console.log(err);
+                });
+            }
                 return;
             }
             //else subtract

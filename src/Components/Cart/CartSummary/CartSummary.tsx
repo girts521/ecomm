@@ -1,7 +1,9 @@
-import React from "react";
+import React, {useState, useEffect} from "react";
 import { Container } from "./styles";
 import CardSummaryCard from "./CartSummaryCard/CardSummaryCard";
 import { useSelector, useDispatch } from "react-redux";
+import { cartActions } from "../../../store/cart";
+
 
 type AuthState = {
   isLoggedIn: boolean;
@@ -32,16 +34,38 @@ type State = {
   auth: AuthState;
 };
 
-const CartSummary: React.FC<{cartProducts:  CartState }> = (cartProducts) => {
-//   const cartProducts = useSelector((state: State) => state.cart);
+const CartSummary: React.FC = () => {
 
-console.log('cartProducts', cartProducts.cartProducts[0]);
+const [cart, setCart] = useState<Item[]>([]);
 
+const dispatch = useDispatch();
+const cartData = useSelector((state: State) => state.cart);
+// const quantity = useSelector((state: State) => state.cart.);
+console.log('cartData',cartData)
+
+useEffect(() => {
+    console.log('effect')
+    let url = `/cartData`;
+    fetch(url, {
+      credentials: "include",
+      method: "GET"
+    })
+      .then(res => res.json())
+      .then(data => {
+        setCart(data);
+        console.log(cart)
+
+      })
+      .catch(err => {
+        console.log(err);
+      });
+      // save cart in store
+} , [cartData]);
 
 
   return (
     <Container>
-      {cartProducts.cartProducts.map((item: Item) => {
+      {cart && cart.map((item: Item) => {
         return <CardSummaryCard key={item.product_id} item={item} />;
       })}
     </Container>

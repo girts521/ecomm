@@ -1,6 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { cartActions } from "../store/cart";
-import { useSelector, useDispatch } from "react-redux";
 
 import { Container, Header, CartInfo } from "./CartStyles";
 
@@ -38,43 +36,14 @@ type State = {
 };
 
 const Cart: React.FC = () => {
-  const [cart, setCart] = useState<Item[]>([]);
 
-  const dispatch = useDispatch();
-  const cartData = useSelector((state: State) => state.cart);
-
-  useEffect(() => {
-    // check redux store for cart
-    if (cartData.length > 0) {
-      setCart(cartData);
-    }
-    // if store doesnt have cart, fetch cart from db
-    else {
-      let url = `/cartData`;
-      fetch(url, {
-        credentials: "include",
-        method: "GET"
-      })
-        .then(res => res.json())
-        .then(data => {
-          setCart(data);
-        })
-        .catch(err => {
-          console.log(err);
-        });
-        // save cart in store
-       cart.forEach(item => {
-         dispatch(cartActions.addToCart(item));
-       })
-    }
-  } , []);
 
   return (
     <>
       <Header>Cart</Header>
       <Container>
           <CartInfo>
-        <CartSummary cartProducts={cart} />
+        <CartSummary  />
         <PurchaseDetails />
         </CartInfo>
         <Categories heading={'You might also like:'}/>

@@ -28,12 +28,17 @@ const cartSlice = createSlice({
         },
         setQuantity(state, action) {
             state = state.map(item => {
-                if (item.product_id === action.payload.id) {
+                if (item.product_id === action.payload.product_id) {
                     item.quantity = action.payload.quantity
                 }
                 return item
             })
+        },
+        removeFromCart(state, action) {
+            state = state.filter(item => item.product_id !== action.payload.product_id)
         }
+
+
     },
   });
 

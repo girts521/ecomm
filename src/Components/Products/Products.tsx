@@ -31,16 +31,6 @@ const Products: React.FC<{category?: string}> = ({category}) => {
     loadProducts()
     observer.unobserve(lastProduct.target)
   }
-  
-  // const lastObserver = new IntersectionObserver(entries => {
-  //   if(productsRef && productsRef.length > 0) {
-  //   const lastProduct = productsRef![productsRef!.length - 1];
-  //   if(lastProduct) {
-  //     console.log('loading more products');
-  //     loadProducts()
-  //   }
-  //   }
-  // }, options);
 
   const observer = new IntersectionObserver(callback, options);
 

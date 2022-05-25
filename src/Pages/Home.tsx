@@ -57,7 +57,7 @@ const Home: React.FC = () => {
   const check = () => {
 
     //logout
-    let url = `/products`;
+    let url = `/logout`;
     fetch(url,{
       credentials: 'include',
       method: 'GET'

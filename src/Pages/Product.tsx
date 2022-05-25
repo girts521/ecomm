@@ -24,6 +24,35 @@ type productsData = {
   product_price: string;
 };
 
+type AuthState = {
+  isLoggedIn: boolean;
+  user: {
+    id: string;
+    firstName: string;
+    email: string;
+    lastName: string;
+    isAdmin: boolean;
+    cart: string[];
+  };
+};
+
+type Item = {
+  product_id: string;
+  product_name: string;
+  price: string;
+  quantity: number;
+  product_img: string;
+  user_id: number;
+  session_id: string;
+};
+
+type CartState = Item[];
+
+type State = {
+  cart: CartState;
+  auth: AuthState;
+};
+
 
 
 const Product: React.FC = () => {
@@ -31,6 +60,8 @@ const Product: React.FC = () => {
   const [product, setProduct] = useState<productsData | null>(null);
 
   const dispatch = useDispatch();
+  const savedCart = useSelector((state: State) => state.cart);
+
 
   useEffect(() => {
     //get product info
@@ -63,7 +94,7 @@ const Product: React.FC = () => {
   };
 
   const addToCartHandler = () => {
-
+    
     const cartData = {
       product_id: productId,
       product_name: product?.product_name,
@@ -72,6 +103,7 @@ const Product: React.FC = () => {
       price: parseFloat(product!.product_price),
       product_img: product?.product_img,
     };
+
     dispatch(cartActions.addToCart(cartData));
 
     //add product to cart in db
