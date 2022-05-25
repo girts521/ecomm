@@ -54,7 +54,7 @@ const Nav: React.FC = () => {
 
   useEffect(() => {
     if(user.firstName.length > 0){
-      console.log('user: ', user.firstName);
+      console.log('user: ', user);
       setUsername(user.firstName);
     }
   } , [user, username]);
