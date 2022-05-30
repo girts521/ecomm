@@ -1,7 +1,6 @@
 import styled from "styled-components";
 
 export const Container = styled.div`
-  /* border: 1px solid red; */
   background-color: #f8f9fa;
   width: 100%;
   height: 20%;
@@ -10,15 +9,15 @@ export const Container = styled.div`
   padding: 10px;
 
   @media (min-width: 768px) {
-      position: relative;
-      width: 50%;
-      margin-right: 5%;
+    position: relative;
+    width: 50%;
+    margin-right: 5%;
   }
 
-  h2{
+  h2 {
     font-size: 1.5rem;
     margin-bottom: 10px;
-    margin-top:10px;
+    margin-top: 10px;
   }
 
   button {
@@ -35,8 +34,8 @@ export const Container = styled.div`
     cursor: pointer;
 
     &:hover {
-        opacity: 0.8;
-        transform: scale(1.01);
+      opacity: 0.8;
+      transform: scale(1.01);
     }
   }
 `;

@@ -1,17 +1,22 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import { Container, CardContent } from "./styles";
 
-const Card: React.FC = () => {
-  return (
-    <Container>
-      <img
-        src="https://images.unsplash.com/photo-1518791841217-8f162f1e1131?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60"
-        alt="Card Image"
-      />
+import { MovingCardData } from "../../types";
 
+const Card: React.FC<{ data: MovingCardData }> = ({ data }) => {
+  const navigate = useNavigate();
+
+  const redirectToProductPage = () => {
+    navigate(`/product/${data.id}`);
+  };
+
+  return (
+    <Container onClick={redirectToProductPage}>
+      <img src={data.product_img} alt="product" />
       <CardContent>
-        <p className="title is-4">Card Title</p>
-        <p className="subtitle is-6">Card Subtitle</p>
+        <p>{data.product_name}</p>
+        <p>{data.product_price}</p>
       </CardContent>
     </Container>
   );

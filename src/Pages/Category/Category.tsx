@@ -1,19 +1,18 @@
 import React from "react";
 import { useParams } from "react-router-dom";
 
-import {Container, CategoryHeading} from "./styles";
+import { Container, CategoryHeading } from "./styles";
 
 import CategoriesBar from "../../Components/CategoriesBar/CategoriesBar";
-import Categories from "../../Components/Categories/Categories";
+import Categories from "../../Components/MovingCards/MovingCards";
 import Deal from "../../Components/Deal/Deal";
 import Products from "../../Components/Products/Products";
 
 const Category: React.FC = () => {
+  const { categoryName } = useParams();
 
-    const { categoryName } = useParams();
-
-
-    return <Container>
+  return (
+    <Container>
       <CategoriesBar />
       <CategoryHeading>{categoryName}</CategoryHeading>
 
@@ -21,7 +20,8 @@ const Category: React.FC = () => {
       <Categories heading={"Best sellers"} />
 
       <Products category={categoryName} />
-     </Container>;
-}
+    </Container>
+  );
+};
 
 export default Category;
