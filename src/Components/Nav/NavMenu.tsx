@@ -1,17 +1,31 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import { Circle, Burger, CloseBtn, BurgerLinks } from "./styles";
 
-const NavMenu: React.FC<{setShow: (state: boolean)=>void ,show:Boolean}> = ({setShow, show}) => {
+const NavMenu: React.FC<{
+  setShow: (state: boolean) => void;
+  show: Boolean;
+}> = ({ setShow, show }) => {
+  const categories = [
+    "T-shirts",
+    "Jeans",
+    "Hoodies",
+    "Shirts",
+    "Sneakers",
+    "Womens shoes",
+    "Blouses",
+    "Skirts",
+    "Dresses",
+    "Sportswear",
+  ];
 
   return (
     <Circle open={show}>
-      <Burger show={show} >
+      <Burger show={show}>
         <svg
-        onClick={() => {
-            setShow(true)
-            console.log('click')
+          onClick={() => {
+            setShow(true);
           }}
-          className={`${show ? "burgerHidden" : "burgerShow"} `}
           xmlns="http://www.w3.org/2000/svg"
           version="1.1"
           x="0px"
@@ -26,7 +40,6 @@ const NavMenu: React.FC<{setShow: (state: boolean)=>void ,show:Boolean}> = ({set
 
       <CloseBtn show={show} onClick={() => setShow(false)}>
         <svg
-          onClick={() => {console.log('click x')}}
           xmlns="http://www.w3.org/2000/svg"
           width="24"
           height="24"
@@ -45,38 +58,15 @@ const NavMenu: React.FC<{setShow: (state: boolean)=>void ,show:Boolean}> = ({set
         <BurgerLinks>
           <ul>
             <li>
-              <a href="#">Home</a>
+              <Link to={"/"}>Home</Link>
             </li>
-            <li >
-              <a href="#">Category 1</a>
-            </li>
-            <li>
-              <a href="#">Category 2</a>
-            </li>
-            <li>
-              <a href="#">Category 3</a>
-            </li>
-            <li>
-              <a href="#">Category 4</a>
-            </li>
-            <li>
-              <a href="#">Category 5</a>
-            </li>
-            <li>
-              <a href="#">Category 6</a>
-            </li>
-            <li>
-              <a href="#">Category 7</a>
-            </li>
-            <li>
-              <a href="#">Category 8</a>
-            </li>
-            <li>
-              <a href="#">Category 9</a>
-            </li>
-            <li>
-              <a href="#">Category 10</a>
-            </li>
+            {categories.map((category) => {
+              return (
+                <li key={category}>
+                  <Link to={`/${category}`}>{category}</Link>
+                </li>
+              );
+            })}
             <li>
               <a href="#">About</a>
             </li>

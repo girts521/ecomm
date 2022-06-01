@@ -1,11 +1,11 @@
 import React from "react";
-import {Header, Banner} from "./styles";
+import { Header, Banner } from "./styles";
 
 const Deal: React.FC<{ header: String }> = ({ header }) => {
   return (
     <>
-        <Header>{header}</Header>
-        <Banner />
+      <Header>{header}</Header>
+      <Banner />
     </>
   );
 };

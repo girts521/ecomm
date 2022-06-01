@@ -15,7 +15,6 @@ export const CategoryHeading = styled.div`
   padding-top: 20px;
   font-size: 40px;
   font-weight: bold;
-  /* color: #fff; */
   margin-bottom: 20px;
   text-transform: uppercase;
 `;

@@ -1,21 +1,31 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import { Container } from "./style";
 
 const CategoriesBar: React.FC = () => {
+  const categories = [
+    "T-shirts",
+    "Jeans",
+    "Hoodies",
+    "Shirts",
+    "Sneakers",
+    "Womens shoes",
+    "Blouses",
+    "Skirts",
+    "Dresses",
+    "Sportswear",
+  ];
+
   return (
     <Container>
       <ul>
-        <li>Category 1</li>
-        <li>Category 2</li>
-        <li>
-          <a href="google.com">Category 3</a>{" "}
-        </li>
-        <li>Category 4</li>
-        <li>Category 5</li>
-        <li>Category 6</li>
-        <li>Category 7</li>
-        <li>Category 8</li>
-        <li>Category 9</li>
+        {categories.map((category) => {
+          return (
+            <li key={category}>
+              <Link to={`/${category}`}>{category}</Link>
+            </li>
+          );
+        })}
       </ul>
     </Container>
   );

@@ -1,4 +1,4 @@
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 
 export const Container = styled.div`
   margin-top: 20px;
@@ -25,16 +25,16 @@ export const Container = styled.div`
   }
 `;
 
-export const Arrow = styled.div<{prev?: Boolean, next?: Boolean}>`
+export const Arrow = styled.div<{ prev?: Boolean; next?: Boolean }>`
   position: absolute;
   height: 100%;
   width: 50%;
   top: 35px;
   color: red;
   z-index: 2;
-  font-size: 50px; 
+  font-size: 50px;
 
-  display: flex; 
+  display: flex;
   flex-direction: column;
   justify-content: center;
   cursor: pointer;

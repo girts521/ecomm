@@ -7,7 +7,6 @@ export const Container = styled.div`
   cursor: pointer;
 
   @media (min-width: 768px) {
-    // align-items: flex-start;
     img {
       width: 200px;
     }
