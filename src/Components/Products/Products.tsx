@@ -1,102 +1,62 @@
 import React, { useEffect, useState, useRef } from "react";
-import { Container, Button } from "./ProductsStyles";
+import { Container } from "./ProductsStyles";
 import ProductCard from "./ProductCard";
+import { productsData } from "../../types";
 
-type productsData = {
-  category_id: string;
-  id: string;
-  product_desc: string;
-  product_img: string;
-  product_name: string;
-  product_price: string;
-};
-
-const Products: React.FC<{category?: string}> = ({category}) => {
+const Products: React.FC<{ category?: string }> = ({ category }) => {
   const [products, setProducts] = useState<productsData[]>([]);
-  const [validCategory, setValidCategory] = useState(false);
-  
 
   const containerRef = useRef<HTMLDivElement>(null);
 
-
   const options = {
     root: null,
-    rootMargin: '100px',
+    rootMargin: "100px",
     threshold: 1.0,
-  }
+  };
 
-  const callback = (entries: any, observer:any) => {
-    const lastProduct = entries[0]
-    if(!lastProduct.isIntersecting) return
-    loadProducts()
-    observer.unobserve(lastProduct.target)
-  }
+  const callback = (entries: any, observer: any) => {
+    const lastProduct = entries[0];
+    if (!lastProduct.isIntersecting) return;
+    loadProducts();
+    observer.unobserve(lastProduct.target);
+  };
 
   const observer = new IntersectionObserver(callback, options);
 
   useEffect(() => {
+    if (containerRef.current?.children.length === 0) {
+      // call for 1st 10 products
 
-    if(!category) {
-      setValidCategory(true)
-    }
-
-    if(category && validCategory === false) {
-        fetch('/categories', {
-            method: 'GET',
-            credentials: 'include'
-        })
-        .then(res => res.json())
-        .then(data => {
-          const categoryList: string[] = []
-          data.forEach((object: {category_name: string}) => {
-            console.log(object.category_name);
-            categoryList.push(object.category_name);
-          })
-          if(categoryList.includes(category)) {
-            console.log('valid category');
-            setValidCategory(true);
-          }else{
-            console.log('invalid category');
-            setValidCategory(false);
-          }
-        })}
-        
-
-    if(containerRef.current?.children.length === 0 && validCategory === true) {
-    // call for 1st 10 products
-
-    let url = `/products`;
-    fetch(url, {
-      credentials: "include",
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        page: 1,
-        limit: 10,
-        category: category,
-      }),
-    })
-      .then((res) => res.json())
-      .then((data: productsData[]) => {
-        console.log(data);
-        setProducts(data);
+      let url = `/products`;
+      fetch(url, {
+        credentials: "include",
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          page: 1,
+          limit: 10,
+          category: category,
+        }),
       })
-      .catch((err) => {
-        console.log(err);
-      });
+        .then((res) => res.json())
+        .then((data: productsData[]) => {
+          setProducts(data);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
     }
 
-    //load more products when scrolled to botto
-    if(containerRef.current && containerRef.current.children.length > 0) {
-      console.log(containerRef.current.children)
-      observer.observe(containerRef.current.children[containerRef.current.children.length - 1])
+    //load more products when scrolled to bottoM
+    if (containerRef.current && containerRef.current.children.length > 0) {
+      //sets observer to the last product
+      observer.observe(
+        containerRef.current.children[containerRef.current.children.length - 1]
+      );
     }
-    
-    
-  }, [products, validCategory ]);
-
+  }, [products]);
 
   //load next page of products
   const loadProducts = () => {
@@ -116,36 +76,38 @@ const Products: React.FC<{category?: string}> = ({category}) => {
       .then((res) => res.json())
       .then((data: productsData[]) => {
         console.log(data);
-        if(data.length === 0 && products.length > 0) {
-          console.log('no more products')
-          observer.unobserve(containerRef.current!.children[containerRef.current!.children.length - 1])
+        if (data.length === 0 && products.length > 0) {
+          //if no more products to load then stop the observer
+          observer.unobserve(
+            containerRef.current!.children[
+              containerRef.current!.children.length - 1
+            ]
+          );
         }
-        if(data.length > 0) {
-        setProducts([...products, ...data]);
+        //add new products to the list
+        if (data.length > 0) {
+          setProducts([...products, ...data]);
         }
       })
       .catch((err) => {
         console.log(err);
       });
-  }
+  };
 
   return (
     <>
-    <Container ref={containerRef}>
-      {products.map((product) => (
-        <ProductCard
-          
-          key={product.id}
-          id={product.id}
-          img={product.product_img}
-          productName={product.product_name}
-          productPrice={product.product_price}
-          categoryId={product.category_id}
-        />
-      ))}
-
-    </Container>
-      </>
+      <Container ref={containerRef}>
+        {products.map((product) => (
+          <ProductCard
+            key={product.id}
+            id={product.id}
+            img={product.product_img}
+            productName={product.product_name}
+            productPrice={product.product_price}
+          />
+        ))}
+      </Container>
+    </>
   );
 };
 

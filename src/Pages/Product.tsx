@@ -9,59 +9,19 @@ import {
   Size,
   Sizes,
 } from "./ProductStyles";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import { cartActions } from "../store/cart";
+import { productsData } from "../types";
 
 import ProductsCarousel from "../Components/Products.tsx/ProductsCarousel/ProductsCarousel";
 import Quantity from "../Components/Cart/Quantity/Quantity";
 
-type productsData = {
-  category_id: string;
-  id: string;
-  product_desc: string;
-  product_img: string;
-  product_name: string;
-  product_price: string;
-};
-
-type AuthState = {
-  isLoggedIn: boolean;
-  user: {
-    id: string;
-    firstName: string;
-    email: string;
-    lastName: string;
-    isAdmin: boolean;
-    cart: string[];
-  };
-};
-
-type Item = {
-  product_id: string;
-  product_name: string;
-  price: string;
-  quantity: number;
-  product_img: string;
-  user_id: number;
-  session_id: string;
-};
-
-type CartState = Item[];
-
-type State = {
-  cart: CartState;
-  auth: AuthState;
-};
-
-
-
 const Product: React.FC = () => {
   const { productId } = useParams();
   const [product, setProduct] = useState<productsData | null>(null);
+  const [selected, setSelected] = useState(Number);
 
   const dispatch = useDispatch();
-  const savedCart = useSelector((state: State) => state.cart);
-
 
   useEffect(() => {
     //get product info
@@ -78,7 +38,6 @@ const Product: React.FC = () => {
     })
       .then((res) => res.json())
       .then((data: productsData[]) => {
-        console.log(data);
         setProduct(data[0]);
       })
       .catch((err) => {
@@ -86,15 +45,11 @@ const Product: React.FC = () => {
       });
   }, []);
 
-  const [selected, setSelected] = useState(Number);
-  let select = false;
-
   const clickHandler = (e: React.MouseEvent<HTMLElement>) => {
     setSelected(Number(e.currentTarget.innerText));
   };
 
   const addToCartHandler = () => {
-    
     const cartData = {
       product_id: productId,
       product_name: product?.product_name,
@@ -142,7 +97,6 @@ const Product: React.FC = () => {
       <ProductInfo>
         <Price>{product && product.product_price}</Price>
         <SmallInfo>{product && product.product_desc}</SmallInfo>
-        {/* <SmallInfo> Brand: Nike</SmallInfo> */}
         <SmallInfo>Selected Size: {selected}</SmallInfo>
 
         <Sizes>

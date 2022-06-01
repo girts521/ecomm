@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { Routes, Route } from "react-router-dom";
 
 import "./reset.css";
@@ -12,16 +12,14 @@ import Login from "./Pages/Login/Login";
 import Register from "./Pages/Login/Register";
 import Category from "./Pages/Category/Category";
 
-
 const Container = styled.main`
-    background: linear-gradient(318deg, #f8f9fa, #e9ecef);
-    background-size: 200% 200%;
+  background: linear-gradient(318deg, #f8f9fa, #e9ecef);
+  background-size: 200% 200%;
 `;
-
 
 const App: React.FC = () => {
   return (
-      <Container>
+    <Container>
       <Nav />
       <Routes>
         <Route path="/" element={<Home />} />
@@ -33,10 +31,8 @@ const App: React.FC = () => {
         <Route path="/register" element={<Register />} />
         <Route path="*" element={<div>Not Found</div>} />
       </Routes>
-      </Container>
+    </Container>
   );
 };
 
 export default App;
-
-

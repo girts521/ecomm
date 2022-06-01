@@ -1,82 +1,38 @@
-import React, {useEffect} from "react";
+import React, { useEffect } from "react";
 import Carousel from "../Components/Carousel/Carousel";
 import CategoriesIcons from "../Components/CategoriesIcons/CategoriesIcons";
 import MovingCards from "../Components/MovingCards/MovingCards";
-import CategoriesBar from "../Components/CategoriesBar/CategoriesBar";
 import Deal from "../Components/Deal/Deal";
 import Products from "../Components/Products/Products";
 import Footer from "../Components/Footer/Footer";
 
-import { useSelector } from 'react-redux';
-import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { authActions } from "../store/auth";
-
-
-
-type AuthState = {
-  auth:{
-  isLoggedIn: boolean;
-  user: {
-    user: {
-      id: string;
-      name: string;
-      email: string;
-      surname: string;
-      isAdmin: boolean;
-    }
-  }
-  }
-}
+import { HomeUserDataType } from "../types";
 
 const Home: React.FC = () => {
-
- const navigate = useNavigate();
- const dispatch = useDispatch();
- const isAuth = useSelector((state: AuthState) => state.auth.isLoggedIn);
- const user = useSelector((state: AuthState) => state.auth.user);
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    let url = `/user`;
-    fetch(url,{
-      credentials: 'include',
-      method: 'GET'
+    let url = "/user";
+    fetch(url, {
+      credentials: "include",
+      method: "GET",
     })
-    .then(res => res.json())
-    .then(data => {
-      if(data.isLoggedIn){
-        dispatch(authActions.login());
-        dispatch(authActions.setUser(data.loggedUser));
-      } 
-    })
-    .catch(err => {
-      console.log(err);
-    });
-  } , []);
-
-  const check = () => {
-
-    //logout
-    let url = `/logout`;
-    fetch(url,{
-      credentials: 'include',
-      method: 'GET'
-    })
-    .then(res => res.json())
-    .then(data => {
-      console.log(data);
-    })
-    .catch(err => {
-      console.log(err);
-    });
-
-  }
-
-
+      .then((res) => res.json())
+      .then((data: HomeUserDataType) => {
+        if (data.isLoggedIn) {
+          dispatch(authActions.login());
+          dispatch(authActions.setUser(data.loggedUser));
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
   return (
     <>
       <Carousel />
-      <button onClick={check}>check</button>
       <CategoriesIcons />
       <MovingCards heading={"Lightning Deals"} />
       <Deal header={"Hot sale"} />
@@ -86,7 +42,6 @@ const Home: React.FC = () => {
       <Deal header={"Special sale"} />
       <Products />
       <Footer />
-
     </>
   );
 };

@@ -5,6 +5,7 @@ import { authActions } from "../../store/auth";
 import { Formik, Form, Field } from "formik";
 import * as yup from "yup";
 import { useNavigate } from "react-router-dom";
+import {UserData, LoginType} from "../../types";
 
 const LoginSchema = yup.object().shape({
   email: yup
@@ -20,18 +21,7 @@ const LoginSchema = yup.object().shape({
     .required("Password is required!"),
 });
 
-interface UserData {
-  isLoggedIn: boolean;
-  message?: string;
-  loggedUser: {
-    cart: string[];
-    email: string;
-    firstName: string;
-    id: number;
-    isAdmin: boolean;
-    lastName: string;
-  };
-}
+
 
 const Login: React.FC = () => {
   const dispatch = useDispatch();
@@ -50,7 +40,7 @@ const Login: React.FC = () => {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        // credentials: "include",
+        credentials: "include",
       },
       body: user,
     })
@@ -76,10 +66,7 @@ const Login: React.FC = () => {
       });
   };
 
-  interface LoginType {
-    email: string;
-    password: string;
-  }
+
 
   const initialValues: LoginType = { email: "", password: "" };
 
@@ -99,7 +86,6 @@ const Login: React.FC = () => {
           <Form>
             <Field
               placeholder="Email"
-              // ref={emailRef}
               name="email"
               type="email"
             />

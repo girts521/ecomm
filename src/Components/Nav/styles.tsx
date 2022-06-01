@@ -1,4 +1,4 @@
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 
 export const NavContainer = styled.div`
   display: flex;
@@ -178,7 +178,6 @@ export const RightNav = styled.div`
   @media (min-width: 768px) {
     margin-left: 0;
     margin-right: 20px;
-    /* // width: 100px; */
 
     div {
       margin-right: 20px;

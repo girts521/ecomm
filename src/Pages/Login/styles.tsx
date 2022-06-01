@@ -29,7 +29,6 @@ export const Container = styled.div`
       font-size: 1rem;
       font-weight: bold;
       margin-bottom: 0.5rem;
-
     }
 
     input {
@@ -67,6 +66,6 @@ export const Container = styled.div`
 `;
 
 export const Error = styled.div`
-color: red;
-margin-bottom: 15px;
+  color: red;
+  margin-bottom: 15px;
 `;
