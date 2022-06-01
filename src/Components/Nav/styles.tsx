@@ -50,11 +50,9 @@ export const Circle = styled.div<{ open: Boolean }>`
   padding: 0;
   margin: 0;
 
-  ${(props) => props.open && "height: 100vh;"}
-  ${(props) => props.open && " width: 80vw;"}
- ${(props) => props.open && "border-radius: 0;"}
- ${(props) => props.open && "animation: BackgroundColorChange 1s ease 1;"}
- ${(props) => props.open && " animation-fill-mode: forwards;"}
+  ${(props) =>
+    props.open &&
+    "height: 100vh; width: 80vw; border-radius: 0; animation: BackgroundColorChange 1s ease 1; animation-fill-mode: forwards;"}
 
   @media (min-width: 768px) {
     display: none;
@@ -75,12 +73,10 @@ export const Burger = styled.div<{ show: Boolean }>`
     width: 100%;
   }
 
-  ${(props) => (props.show ? "opacity: 0;" : "opacity: 1;")}
-  ${(props) =>
-    props.show ? "transform: rotate(180deg);" : "transform: rotate(-180deg);"}
-  ${(props) =>
-    props.show ? "transition-delay: 0.1s;" : "transition-delay: 0.3s;"}
-  ${(props) => (props.show ? "z-index: 1;" : "z-index: 3;")}
+  ${(props) => (props.show 
+  ? "opacity: 0; transform: rotate(180deg); transition-delay: 0.1s; z-index: 1;" 
+  : "opacity: 1; transform: rotate(-180deg); transition-delay: 0.3s; z-index: 3;")}
+
 `;
 
 export const CloseBtn = styled.div<{ show: Boolean }>`
@@ -89,33 +85,10 @@ export const CloseBtn = styled.div<{ show: Boolean }>`
   left: 17px;
   transition-property: opacity, transform;
 
-  ${(props) => (props.show ? "opacity: 1;" : "opacity: 0;")}
-  ${(props) => (props.show ? "z-index: 2;" : "z-index: 1;")}
-${(props) =>
-    props.show ? "transform: rotate(180deg);" : "transform: rotate(-180deg);"}
-${(props) =>
-    props.show ? "transition-delay: 0.5s;" : "transition-delay: 0.1s;"}
-${(props) =>
-    props.show ? "transition-duration: 0.5s;" : "transition-duration: 1s;"}
+  ${(props) => (props.show 
+    ? "opacity: 1; z-index: 2; transform: rotate(180deg); transition-delay: 0.5s; transition-duration: 0.5s;" 
+    : "opacity: 0; z-index: 1; transform: rotate(-180deg); transition-delay: 0.1s; transition-duration: 1s;")}
 `;
-
-const createCSS = () => {
-  let styles = "";
-
-  for (let i = 0; i < 15; i += 1) {
-    styles += `
-       ul :nth-child({${i}n) {
-        animation-duration: #{(${i / 8})}s;
-        background-color: red;
-        color: red;
-      }
-       `;
-  }
-
-  return css`
-    ${styles}
-  `;
-};
 
 export const BurgerLinks = styled.div`
   margin-top: 50px;
@@ -135,9 +108,6 @@ export const BurgerLinks = styled.div`
     animation: MoveUp 0.5s ease 0.2s;
     animation-fill-mode: forwards;
   }
-
-  /* this function should work but does not seem to apply it to li, which should be the child of ul */
-  /* ${createCSS()} */
 
   @keyframes MoveUp {
     0% {
@@ -190,9 +160,6 @@ export const RightNav = styled.div`
     cursor: pointer;
   }
 
-  /* .searchInput{
-      margin-right: 7px;
-      animation: fadeIn 0.7s ease; */
 
   input {
     margin-right: 7px;
@@ -206,12 +173,12 @@ export const RightNav = styled.div`
     // outline-color:#f8f9fa;
     background-color: #adb5bd;
   }
-  /* } */
+ 
 
   @media (min-width: 768px) {
     margin-left: 0;
     margin-right: 20px;
-    // width: 100px;
+    /* // width: 100px; */
 
     div {
       margin-right: 20px;

@@ -8,65 +8,36 @@ import {
   Login,
   Cart,
 } from "./styles";
-import { useSelector } from 'react-redux';
+import { useSelector } from "react-redux";
 import NavMenu from "./NavMenu";
 import { useNavigate } from "react-router-dom";
-
-type AuthState = {
-  auth:{
-    isLoggedIn: boolean;
-    user: {
-      id: string;
-      firstName: string;
-      email: string;
-      lastName: string;
-      isAdmin: boolean;
-      cart: string[]
-    }
-  
-  }
-}
-
+import { AuthState } from "../../types";
 
 const Nav: React.FC = () => {
   const [show, setShow] = useState(false);
   const [showSearch, setShowSearch] = useState(false);
   const [showBrand, setShowBrand] = useState(true);
-  const [username, setUsername] = useState('');
 
   const navigate = useNavigate();
-
-  //change nav state on click
-  const showNav = (state: boolean) => {
-    setShow(state);
-  };
 
   //change search state on click
   const showSearchBar = () => {
     setShowSearch(!showSearch);
     if (window.innerWidth < 768) {
-      setShowBrand(!showBrand); 
+      setShowBrand(!showBrand);
     }
   };
 
-  const user = useSelector((state: AuthState) => state.auth.user);
-
-
-  useEffect(() => {
-    if(user.firstName.length > 0){
-      console.log('user: ', user);
-      setUsername(user.firstName);
-    }
-  } , [user, username]);
-
+  //will be used for the user pop up menu
+  // const user = useSelector((state: AuthState) => state.auth.user);
 
   return (
     <NavContainer>
-      {show && <Backdrop onClick={() => showNav(false)} />}
+      {show && <Backdrop onClick={() => setShow(false)} />}
 
       <NavMenu show={show} setShow={setShow} />
 
-      {showBrand ? <Brand onClick={() => navigate('/') }>My Brand Name</Brand> : ""}
+      {showBrand && <Brand onClick={() => navigate("/")}>My Brand Name</Brand>}
 
       <RightNav>
         {showSearch && (
@@ -98,7 +69,7 @@ const Nav: React.FC = () => {
           </svg>
         </Login>
 
-        <Cart onClick={()=> navigate('/cart')}>
+        <Cart onClick={() => navigate("/cart")}>
           <svg
             xmlns="http://www.w3.org/2000/svg"
             height="24px"

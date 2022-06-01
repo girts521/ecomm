@@ -8,7 +8,8 @@ export type MovingCardData = {
 };
 
 export type AuthState = {
-  isLoggedIn: boolean;
+  auth: {
+    isLoggedIn: boolean;
   user: {
     id: string;
     firstName: string;
@@ -16,7 +17,8 @@ export type AuthState = {
     lastName: string;
     isAdmin: boolean;
     cart: string[];
-  };
+  }
+}
 };
 
 export type Item = {
@@ -28,7 +30,6 @@ export type Item = {
   user_id: number;
   session_id: string;
 };
-
 
 export type CartState = Item[];
 

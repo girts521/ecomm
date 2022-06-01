@@ -41,8 +41,6 @@ export const Category = styled.div`
   cursor: pointer;
 
   @media (max-width: 768px) {
-    // flex-direction: row;
-
     img {
       width: 50px;
       height: 50px;
@@ -54,7 +52,6 @@ export const Category = styled.div`
   }
 
   img {
-    // width: 50%;
     max-height: 100px;
     margin-bottom: 7px;
   }

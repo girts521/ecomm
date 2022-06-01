@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { cartActions } from "../../../store/cart";
 import { State } from "../../../types";
 
-const Quantity: React.FC<{ product_id?: string }> = ({product_id}) => {
+const Quantity: React.FC<{ product_id?: string }> = ({ product_id }) => {
   const dispatch = useDispatch();
   const cartData = useSelector((state: State) => state.cart);
 
@@ -41,10 +41,9 @@ const Quantity: React.FC<{ product_id?: string }> = ({product_id}) => {
           }),
         })
           .then((res) => res.json())
-          .then((data) => {
+          .then((data: String) => {
             console.log(data);
             dispatch(cartActions.removeFromCart(product_id));
-            console.log("updated cartData", cartData);
           })
           .catch((err) => {
             console.log(err);

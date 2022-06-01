@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-type AuthState = {
+type initialAuthStateType = {
     isLoggedIn: boolean;
     user: {
       id: string;
@@ -12,7 +12,7 @@ type AuthState = {
     }
 }
 
-const initialAuthState: AuthState  = {
+const initialAuthState: initialAuthStateType  = {
     isLoggedIn: false,
     user: {
       id: '',
