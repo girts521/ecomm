@@ -15,9 +15,10 @@ import { productsData } from "../types";
 
 import ProductsCarousel from "../Components/Products.tsx/ProductsCarousel/ProductsCarousel";
 import Quantity from "../Components/Cart/Quantity/Quantity";
+import { Item } from "../types";
 
 const Product: React.FC = () => {
-  const { productId } = useParams();
+  const { productId} = useParams();
   const [product, setProduct] = useState<productsData | null>(null);
   const [selected, setSelected] = useState(Number);
 
@@ -49,14 +50,15 @@ const Product: React.FC = () => {
     setSelected(Number(e.currentTarget.innerText));
   };
 
+
+
   const addToCartHandler = () => {
-    const cartData = {
-      product_id: productId,
-      product_name: product?.product_name,
-      size: selected,
+    const cartData: Item = {
+      product_id: productId!,
+      product_name: product!.product_name,
       quantity: 1,
-      price: parseFloat(product!.product_price),
-      product_img: product?.product_img,
+      price: product!.product_price,
+      product_img: product!.product_img,
     };
 
     dispatch(cartActions.addToCart(cartData));

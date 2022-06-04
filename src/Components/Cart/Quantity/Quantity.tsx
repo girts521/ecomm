@@ -4,13 +4,38 @@ import { Container } from "./styles";
 import { useDispatch, useSelector } from "react-redux";
 import { cartActions } from "../../../store/cart";
 import { State } from "../../../types";
+import { Item } from "../../../types";
 
-const Quantity: React.FC<{ product_id?: string }> = ({ product_id }) => {
+const Quantity: React.FC<{ product?: Item }> = ({ product }) => {
   const dispatch = useDispatch();
   const cartData = useSelector((state: State) => state.cart);
 
+  const removeProducts = (product: Item) => {
+    const url = "/deleteItem";
+        fetch(url, {
+          method: "POST",
+          credentials: "include",
+          headers: {
+            "Content-Type": "application/json",
+            Credentials: "include",
+          },
+          body: JSON.stringify({
+            product_id: product.product_id,
+          }),
+        })
+          .then((res) => res.json())
+          .then((data: String) => {
+            if (data === "success") {
+              //delete item from cart in redux
+              dispatch(cartActions.removeFromCart(product.product_id));
+            } else {
+              console.log("error");
+            }
+          });
+        }
+
   //state for product quantity
-  const [quantity, setQuantity] = useState(1);
+  const [quantity, setQuantity] = useState(product?.quantity || 1);
 
   //function to add product quantity
   const addQuantity = () => {
@@ -26,34 +51,16 @@ const Quantity: React.FC<{ product_id?: string }> = ({ product_id }) => {
   const subtractQuantity = () => {
     //if quantity is 1, do not subtract
     if (quantity === 1) {
-      if (product_id) {
+      if (product && product!.product_id) {
         //delete item from cart
-        const url = "/deleteItem";
-        fetch(url, {
-          method: "POST",
-          credentials: "include",
-          headers: {
-            "Content-Type": "application/json",
-            Credentials: "include",
-          },
-          body: JSON.stringify({
-            product_id: product_id,
-          }),
-        })
-          .then((res) => res.json())
-          .then((data: String) => {
-            console.log(data);
-            dispatch(cartActions.removeFromCart(product_id));
-          })
-          .catch((err) => {
-            console.log(err);
-          });
+        removeProducts(product!);
       }
       return;
     }
     //else subtract
     else {
       setQuantity(quantity - 1);
+      removeProducts(product!);
     }
   };
 
