@@ -24,8 +24,8 @@ const Quantity: React.FC<{ product?: Item }> = ({ product }) => {
           }),
         })
           .then((res) => res.json())
-          .then((data: String) => {
-            if (data === "success") {
+          .then((data) => {
+            if (data.message === "success") {
               //delete item from cart in redux
               dispatch(cartActions.removeFromCart(product.product_id));
             } else {
@@ -41,7 +41,35 @@ const Quantity: React.FC<{ product?: Item }> = ({ product }) => {
   const addQuantity = () => {
     //if quantity is less than 10, add 1 to quantity
     if (quantity < 10) {
-      setQuantity(quantity + 1);
+      if (product && product!.product_id) {
+        setQuantity(quantity + 1);
+        fetch("/addToCart", {
+          credentials: "include",
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Credentials: "include",
+          },
+          body: JSON.stringify({
+            product: {
+              product_id: product.product_id,
+              product_name: product.product_name,
+              quantity: product.quantity + 1,
+              product_img: product.product_img,
+              price: product.price,
+            },
+          }),
+        })
+        .then((res) => res.json())
+          .then((data) => {
+            console.log('data when adding: ', data);
+            if (data.message === "success") {
+            const changedProduct: Item = data.cart.find((item: Item) => item.product_id === product.product_id)
+            dispatch(cartActions.addToCart({id: product!.product_id, price: changedProduct.price }));
+            console.log();
+            }
+          })
+      }
     } else {
       return;
     }
