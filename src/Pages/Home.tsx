@@ -30,9 +30,22 @@ const Home: React.FC = () => {
         console.log(err);
       });
   }, []);
+
+  const logout = () => {
+    let url = "/logout";
+    fetch(url, {
+      credentials: "include",
+      method: "GET",
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data)
+      })
+  }
   return (
     <>
       <Carousel />
+      <button onClick={logout}>logout</button>
       <CategoriesIcons />
       <MovingCards heading={"Lightning Deals"} />
       <Deal header={"Hot sale"} />
