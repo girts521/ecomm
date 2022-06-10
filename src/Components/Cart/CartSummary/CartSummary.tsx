@@ -26,8 +26,9 @@ const CartSummary: React.FC = () => {
         console.log('cart data from db',data)
         setCart(data);
         if(cartData.cart.length === 0){
+          console.log('this should be empty: ',cartData.cart.length)
           data.forEach((item: Item) => {
-            dispatch(cartActions.addToCart(item));
+            dispatch(cartActions.addToCart({item: item}));
           })
         }
         console.log('in redux after:', cartData)

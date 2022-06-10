@@ -27,7 +27,12 @@ const Quantity: React.FC<{ product?: Item }> = ({ product }) => {
           .then((data) => {
             if (data.message === "success") {
               //delete item from cart in redux
-              dispatch(cartActions.removeFromCart(product.product_id));
+              const changedProduct: Item = data.cart.find((item: Item) => item.product_id === product.product_id)
+              if(changedProduct){
+              dispatch(cartActions.removeFromCart({id: product.product_id, price: changedProduct.price }));
+              }else{
+                dispatch(cartActions.removeFromCart({id: product.product_id }));
+              }
             } else {
               console.log("error");
             }
@@ -66,7 +71,8 @@ const Quantity: React.FC<{ product?: Item }> = ({ product }) => {
             if (data.message === "success") {
             const changedProduct: Item = data.cart.find((item: Item) => item.product_id === product.product_id)
             dispatch(cartActions.addToCart({id: product!.product_id, price: changedProduct.price }));
-            console.log();
+            }else if(data.message === "error"){
+              console.log("error");
             }
           })
       }
