@@ -9,12 +9,13 @@ import {
   Size,
   Sizes,
 } from "./ProductStyles";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { cartActions } from "../store/cart";
 import { productsData } from "../types";
 
 import ProductsCarousel from "../Components/Products.tsx/ProductsCarousel/ProductsCarousel";
 import Quantity from "../Components/Cart/Quantity/Quantity";
+import { Item, State } from "../types";
 
 const Product: React.FC = () => {
   const { productId } = useParams();
@@ -22,6 +23,7 @@ const Product: React.FC = () => {
   const [selected, setSelected] = useState(Number);
 
   const dispatch = useDispatch();
+  const cartDataInRedux = useSelector((state: State) => state.cart);
 
   useEffect(() => {
     //get product info
@@ -43,6 +45,27 @@ const Product: React.FC = () => {
       .catch((err) => {
         console.log(err);
       });
+
+    //check redux and if cart is empty, double check with db
+    if (cartDataInRedux.cart.length === 0) {
+      fetch("/cartData", {
+        credentials: "include",
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Credentials: "include",
+        },
+      })
+        .then((res) => res.json())
+        .then((data: Item[]) => {
+          if (data.length > 0) {
+            //update redux to include everything in cart
+            data.forEach((item: Item) => {
+              dispatch(cartActions.addToCart({item: item}));
+            });
+          }
+        });
+    }
   }, []);
 
   const clickHandler = (e: React.MouseEvent<HTMLElement>) => {
@@ -50,16 +73,13 @@ const Product: React.FC = () => {
   };
 
   const addToCartHandler = () => {
-    const cartData = {
-      product_id: productId,
-      product_name: product?.product_name,
-      size: selected,
+    const cartData: Item = {
+      product_id: productId!,
+      product_name: product!.product_name,
       quantity: 1,
-      price: parseFloat(product!.product_price),
-      product_img: product?.product_img,
+      price: product!.product_price,
+      product_img: product!.product_img,
     };
-
-    dispatch(cartActions.addToCart(cartData));
 
     //add product to cart in db
     let url = "/addToCart";
@@ -81,12 +101,23 @@ const Product: React.FC = () => {
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
+        console.log("data from db on adding: ", data);
+        const changedProduct: Item = data.cart.find(
+          (item: Item) => item.product_id === productId
+        );
+        console.log("changed product: ", changedProduct);
+        dispatch(
+          cartActions.addToCart({ id: productId, price: changedProduct.price, item: changedProduct })
+        );
       })
       .catch((err) => {
         console.log(err);
       });
   };
+
+  const test = () => {
+    console.log(cartDataInRedux.cart)
+  }
 
   return (
     <Container>
@@ -95,6 +126,7 @@ const Product: React.FC = () => {
       <ProductsCarousel />
 
       <ProductInfo>
+        <button onClick={test}>check</button>
         <Price>{product && product.product_price}</Price>
         <SmallInfo>{product && product.product_desc}</SmallInfo>
         <SmallInfo>Selected Size: {selected}</SmallInfo>

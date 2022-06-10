@@ -51,8 +51,8 @@ const Register: React.FC = () => {
       body: JSON.stringify({
         email: values.email,
         password: values.password,
-        name: values.name,
-        surname: values.surname,
+        firstName: values.name,
+        lastName: values.surname,
       }),
     })
       .then((res) => res.json())

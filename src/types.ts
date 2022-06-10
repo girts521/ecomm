@@ -23,15 +23,17 @@ export type AuthState = {
 
 export type Item = {
   product_id: string;
-  product_name: string;
+  product_name: string; 
   price: string;
   quantity: number;
   product_img: string;
-  user_id: number;
-  session_id: string;
+  user_id?: number;
+  session_id?: string;
 };
 
-export type CartState = Item[];
+export type CartState = {
+  cart: Item[];
+};
 
 export type State = {
   cart: CartState;
