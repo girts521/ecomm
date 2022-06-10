@@ -105,3 +105,7 @@ export type initialAuthStateType = {
     }
 }
 
+export  type CategoriesFromDB = {
+  category_name: string;
+};
+

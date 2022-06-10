@@ -1,23 +1,34 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { Circle, Burger, CloseBtn, BurgerLinks } from "./styles";
+import {CategoriesFromDB} from '../../types'
 
 const NavMenu: React.FC<{
   setShow: (state: boolean) => void;
   show: Boolean;
 }> = ({ setShow, show }) => {
-  const categories = [
-    "T-shirts",
-    "Jeans",
-    "Hoodies",
-    "Shirts",
-    "Sneakers",
-    "Womens shoes",
-    "Blouses",
-    "Skirts",
-    "Dresses",
-    "Sportswear",
-  ];
+  const [categories, setCategories] = useState<string[]>([]);
+
+  useEffect(() => {
+    let url = "/categories";
+    fetch(url, {
+      credentials: "include",
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Credentials: "include",
+      },
+    })
+      .then((res) => res.json())
+      .then((data: CategoriesFromDB[]) => {
+        console.log(data);
+        if (data.length > 0) {
+          data.forEach((item: CategoriesFromDB) => {
+            setCategories((categories) => [...categories, item.category_name]);
+          });
+        }
+      });
+  }, []);
 
   return (
     <Circle open={show}>
@@ -57,12 +68,12 @@ const NavMenu: React.FC<{
       {show && (
         <BurgerLinks>
           <ul>
-            <li>
+            <li onClick={() => setShow(false)}>
               <Link to={"/"}>Home</Link>
             </li>
             {categories.map((category) => {
               return (
-                <li key={category}>
+                <li onClick={() => setShow(false)} key={category}>
                   <Link to={`/${category}`}>{category}</Link>
                 </li>
               );

@@ -24,6 +24,7 @@ const Products: React.FC<{ category?: string }> = ({ category }) => {
   const observer = new IntersectionObserver(callback, options);
 
   useEffect(() => {
+    console.log('category: ',category)
     if (containerRef.current?.children.length === 0) {
       // call for 1st 10 products
 
@@ -56,7 +57,11 @@ const Products: React.FC<{ category?: string }> = ({ category }) => {
         containerRef.current.children[containerRef.current.children.length - 1]
       );
     }
-  }, [products]);
+  }, [products, category]);
+
+  useEffect(() => {
+    setProducts([]);
+  }, [category]);
 
   //load next page of products
   const loadProducts = () => {

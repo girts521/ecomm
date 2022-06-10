@@ -190,7 +190,7 @@ const Product: React.FC = () => {
           </Size>
         </Sizes>
 
-        <Quantity />
+        {/* <Quantity /> */}
       </ProductInfo>
       <AddToCart>
         <button onClick={addToCartHandler}>Add to cart</button>

@@ -6,7 +6,7 @@ import { cartActions } from "../../../store/cart";
 import { State } from "../../../types";
 import { Item } from "../../../types";
 
-const Quantity: React.FC<{ product?: Item }> = ({ product }) => {
+const Quantity: React.FC<{ product: Item }> = ({ product }) => {
   const dispatch = useDispatch();
   const cartData = useSelector((state: State) => state.cart);
 
