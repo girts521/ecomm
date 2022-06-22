@@ -28,7 +28,7 @@ const Products: React.FC<{ category?: string }> = ({ category }) => {
     if (containerRef.current?.children.length === 0) {
       // call for 1st 10 products
 
-      let url = `/products`;
+      let url = `/api/products`;
       fetch(url, {
         credentials: "include",
         method: "POST",
@@ -65,7 +65,7 @@ const Products: React.FC<{ category?: string }> = ({ category }) => {
 
   //load next page of products
   const loadProducts = () => {
-    let url = `/products`;
+    let url = `/api/products`;
     fetch(url, {
       credentials: "include",
       method: "POST",

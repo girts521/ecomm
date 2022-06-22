@@ -14,7 +14,7 @@ const Home: React.FC = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    let url = "/user";
+    let url = "/api/user";
     fetch(url, {
       credentials: "include",
       method: "GET",
@@ -32,7 +32,7 @@ const Home: React.FC = () => {
   }, []);
 
   const logout = () => {
-    let url = "/logout";
+    let url = "/api/categories";
     fetch(url, {
       credentials: "include",
       method: "GET",
@@ -42,6 +42,7 @@ const Home: React.FC = () => {
         console.log(data)
       })
   }
+  
   return (
     <>
       <Carousel />

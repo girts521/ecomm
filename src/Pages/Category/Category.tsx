@@ -14,7 +14,7 @@ const Category: React.FC = () => {
   const [validCategory, setValidCategory] = useState(false);
 
   useEffect(() => {
-    fetch("/categories", {
+    fetch("/api/categories", {
       method: "GET",
       credentials: "include",
     })

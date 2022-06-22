@@ -46,7 +46,7 @@ const Categories: React.FC<{ heading: String }> = ({ heading }) => {
     //should call only for specific products related to sales, something for future
     if (cardData.length === 0) {
       //load data from db
-      fetch("/products", {
+      fetch("/api/products", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

@@ -42,7 +42,7 @@ const Register: React.FC = () => {
 
   //form submit handler for registration
   const submit = (values: RegisterType) => {
-    fetch("/register", {
+    fetch("/api/register", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

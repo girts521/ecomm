@@ -11,7 +11,7 @@ const Quantity: React.FC<{ product: Item }> = ({ product }) => {
   const cartData = useSelector((state: State) => state.cart);
 
   const removeProducts = (product: Item) => {
-    const url = "/deleteItem";
+    const url = "/api/deleteItem";
         fetch(url, {
           method: "POST",
           credentials: "include",
@@ -48,7 +48,7 @@ const Quantity: React.FC<{ product: Item }> = ({ product }) => {
     if (quantity < 10) {
       if (product && product!.product_id) {
         setQuantity(quantity + 1);
-        fetch("/addToCart", {
+        fetch("/api/addToCart", {
           credentials: "include",
           method: "POST",
           headers: {

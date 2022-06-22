@@ -27,7 +27,7 @@ const Product: React.FC = () => {
 
   useEffect(() => {
     //get product info
-    let url = "/products";
+    let url = "/api/products";
     fetch(url, {
       credentials: "include",
       method: "POST",
@@ -48,7 +48,7 @@ const Product: React.FC = () => {
 
     //check redux and if cart is empty, double check with db
     if (cartDataInRedux.cart.length === 0) {
-      fetch("/cartData", {
+      fetch("/api/cartData", {
         credentials: "include",
         method: "GET",
         headers: {
@@ -82,7 +82,7 @@ const Product: React.FC = () => {
     };
 
     //add product to cart in db
-    let url = "/addToCart";
+    let url = "/api/addToCart";
     fetch(url, {
       credentials: "include",
       method: "POST",

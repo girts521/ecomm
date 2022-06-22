@@ -16,7 +16,7 @@ const CartSummary: React.FC = () => {
     console.log('1st effect')
     console.log('cart data',cartData)
 
-    let url = "/cartData"; 
+    let url = "/api/cartData"; 
     fetch(url, {
       credentials: "include",
       method: "GET",

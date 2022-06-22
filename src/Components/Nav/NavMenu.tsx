@@ -10,7 +10,7 @@ const NavMenu: React.FC<{
   const [categories, setCategories] = useState<string[]>([]);
 
   useEffect(() => {
-    let url = "/categories";
+    let url = "/api/categories";
     fetch(url, {
       credentials: "include",
       method: "GET",
