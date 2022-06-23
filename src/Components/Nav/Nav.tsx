@@ -8,15 +8,18 @@ import {
   Login,
   Cart,
 } from "./styles";
-import { useSelector } from "react-redux";
 import NavMenu from "./NavMenu";
+import UserMenu from "../UserMenu/UserMenu";
+
 import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 import { AuthState } from "../../types";
 
 const Nav: React.FC = () => {
   const [show, setShow] = useState(false);
   const [showSearch, setShowSearch] = useState(false);
   const [showBrand, setShowBrand] = useState(true);
+  const [showUserMenu, setShowUsermenu] = useState(true)
 
   const navigate = useNavigate();
 
@@ -29,7 +32,35 @@ const Nav: React.FC = () => {
   };
 
   //will be used for the user pop up menu
-  // const user = useSelector((state: AuthState) => state.auth.user);
+  const user = useSelector((state: AuthState) => state.auth.user);
+  const userMenu = () => {
+    console.log(user.id.length)
+
+    if(user.id.length > 0){
+      //means a user is logged in
+      setShowUsermenu(!showUserMenu) 
+    }else if (user.id.length === 0){
+      navigate('/login')
+    }
+
+  }
+
+  //func to search db
+  //take in a search:string and send it to /api/search the db will query postgresql products based on product_name
+  const searchDB = (e: React.FormEvent<HTMLInputElement>) => {
+    const search = e.currentTarget.value
+    console.log(search)
+
+    fetch('/api/search', {
+      method: 'GET',
+      credentials: 'include',
+      body: search
+    })
+    .then((res) => res.json())
+    .then((data) => {
+      console.log(data)
+    })
+  }
 
   return (
     <NavContainer>
@@ -38,11 +69,15 @@ const Nav: React.FC = () => {
       <NavMenu show={show} setShow={setShow} />
 
       {showBrand && <Brand onClick={() => navigate("/")}>My Brand Name</Brand>}
+      {showUserMenu && <UserMenu />}
 
       <RightNav>
+ 
+     
+
         {showSearch && (
           <div>
-            <input type="text" autoFocus />
+            <input onChange={searchDB} type="text" autoFocus />
           </div>
         )}
 
@@ -56,7 +91,7 @@ const Nav: React.FC = () => {
           </svg>
         </Search>
 
-        <Login>
+        <Login onClick={userMenu}>
           <svg
             xmlns="http://www.w3.org/2000/svg"
             height="24px"

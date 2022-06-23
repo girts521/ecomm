@@ -37,7 +37,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
-  "proxy": "http://shop.gkarcevskis.com",
+  "proxy": "https://shop.gkarcevskis.com",
   "eslintConfig": {
     "extends": [
       "react-app",

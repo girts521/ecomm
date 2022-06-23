@@ -155,6 +155,7 @@ export const RightNav = styled.div`
   justify-content: center;
   align-items: center;
   margin-right: 10px;
+  position: relative;
 
   svg {
     cursor: pointer;

@@ -1,10 +1,11 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Carousel from "../Components/Carousel/Carousel";
 import CategoriesIcons from "../Components/CategoriesIcons/CategoriesIcons";
 import MovingCards from "../Components/MovingCards/MovingCards";
 import Deal from "../Components/Deal/Deal";
 import Products from "../Components/Products/Products";
 import Footer from "../Components/Footer/Footer";
+import Alert from "../Components/Alert/Alert";
 
 import { useDispatch } from "react-redux";
 import { authActions } from "../store/auth";
@@ -12,6 +13,7 @@ import { HomeUserDataType } from "../types";
 
 const Home: React.FC = () => {
   const dispatch = useDispatch();
+  const [showAlert, setShowAlert] = useState(false)
 
   useEffect(() => {
     let url = "/api/user";
@@ -22,7 +24,11 @@ const Home: React.FC = () => {
       .then((res) => res.json())
       .then((data: HomeUserDataType) => {
         if (data.isLoggedIn) {
-          dispatch(authActions.login());
+          setShowAlert(true)
+          setTimeout(() => {
+            setShowAlert(false)
+          }, 3000)
+          dispatch(authActions.logout()); 
           dispatch(authActions.setUser(data.loggedUser));
         }
       })
@@ -31,22 +37,11 @@ const Home: React.FC = () => {
       });
   }, []);
 
-  const logout = () => {
-    let url = "/api/categories";
-    fetch(url, {
-      credentials: "include",
-      method: "GET",
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        console.log(data)
-      })
-  }
   
   return (
     <>
       <Carousel />
-      <button onClick={logout}>logout</button>
+      {showAlert &&  <Alert text="Welcome to our lovely shop, feel free to browse!" /> }
       <CategoriesIcons />
       <MovingCards heading={"Lightning Deals"} />
       <Deal header={"Hot sale"} />
