@@ -24,7 +24,6 @@ const Products: React.FC<{ category?: string }> = ({ category }) => {
   const observer = new IntersectionObserver(callback, options);
 
   useEffect(() => {
-    console.log('category: ',category)
     if (containerRef.current?.children.length === 0) {
       // call for 1st 10 products
 
@@ -80,7 +79,6 @@ const Products: React.FC<{ category?: string }> = ({ category }) => {
     })
       .then((res) => res.json())
       .then((data: productsData[]) => {
-        console.log(data);
         if (data.length === 0 && products.length > 0) {
           //if no more products to load then stop the observer
           observer.unobserve(

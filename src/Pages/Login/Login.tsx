@@ -5,7 +5,7 @@ import { authActions } from "../../store/auth";
 import { Formik, Form, Field } from "formik";
 import * as yup from "yup";
 import { useNavigate } from "react-router-dom";
-import {UserData, LoginType} from "../../types";
+import { UserData, LoginType } from "../../types";
 
 const LoginSchema = yup.object().shape({
   email: yup
@@ -20,8 +20,6 @@ const LoginSchema = yup.object().shape({
     )
     .required("Password is required!"),
 });
-
-
 
 const Login: React.FC = () => {
   const dispatch = useDispatch();
@@ -66,8 +64,6 @@ const Login: React.FC = () => {
       });
   };
 
-
-
   const initialValues: LoginType = { email: "", password: "" };
 
   return (
@@ -84,11 +80,7 @@ const Login: React.FC = () => {
       >
         {({ errors, touched }) => (
           <Form>
-            <Field
-              placeholder="Email"
-              name="email"
-              type="email"
-            />
+            <Field placeholder="Email" name="email" type="email" />
             {errors.email && touched.email ? (
               <Error>{errors.email}</Error>
             ) : null}

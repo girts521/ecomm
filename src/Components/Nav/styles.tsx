@@ -208,3 +208,17 @@ export const Cart = styled.div`
   justify-content: center;
   align-items: center;
 `;
+
+export const SearchPopUp = styled.div`
+  position: absolute;
+  background-color: #adb5bd;
+  border-radius: 15px;
+  width: 155px;
+
+  li{
+    padding: 7px;
+    margin: 5px;
+    list-style-type: none;
+    cursor: pointer;
+  }
+`

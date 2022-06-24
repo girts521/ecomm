@@ -9,30 +9,22 @@ const CartSummary: React.FC = () => {
   const [cart, setCart] = useState<Item[]>([]);
   const dispatch = useDispatch();
 
-
   const cartData = useSelector((state: State) => state.cart);
 
   useEffect(() => {
-    console.log('1st effect')
-    console.log('cart data',cartData)
-
-    let url = "/api/cartData"; 
+    let url = "/api/cartData";
     fetch(url, {
       credentials: "include",
       method: "GET",
     })
       .then((res) => res.json())
       .then((data: Item[]) => {
-        console.log('cart data from db',data)
         setCart(data);
-        if(cartData.cart.length === 0){
-          console.log('this should be empty: ',cartData.cart.length)
+        if (cartData.cart.length === 0) {
           data.forEach((item: Item) => {
-            dispatch(cartActions.addToCart({item: item}));
-          })
+            dispatch(cartActions.addToCart({ item: item }));
+          });
         }
-        console.log('in redux after:', cartData)
-
       })
       .catch((err) => {
         console.log(err);
@@ -41,8 +33,6 @@ const CartSummary: React.FC = () => {
   }, []);
 
   useEffect(() => {
-    console.log('2nd effect')
-    console.log('cart data',cartData)
     setCart(cartData.cart);
   }, [cartData]);
 
@@ -52,10 +42,6 @@ const CartSummary: React.FC = () => {
         cart.map((item: Item) => {
           return <CardSummaryCard key={item.product_id} item={item} />;
         })}
-
-        <button onClick={() => {
-          console.log(cartData)
-        }}>Checkout</button>
     </Container>
   );
 };

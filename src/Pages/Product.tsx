@@ -14,7 +14,6 @@ import { cartActions } from "../store/cart";
 import { productsData } from "../types";
 
 import ProductsCarousel from "../Components/Products.tsx/ProductsCarousel/ProductsCarousel";
-import Quantity from "../Components/Cart/Quantity/Quantity";
 import Alert from "../Components/Alert/Alert";
 import { Item, State } from "../types";
 
@@ -22,8 +21,7 @@ const Product: React.FC = () => {
   const { productId } = useParams();
   const [product, setProduct] = useState<productsData | null>(null);
   const [selected, setSelected] = useState(Number);
-  const [showAlert, setShowAlert] = useState(false)
-
+  const [showAlert, setShowAlert] = useState(false);
 
   const dispatch = useDispatch();
   const cartDataInRedux = useSelector((state: State) => state.cart);
@@ -64,12 +62,12 @@ const Product: React.FC = () => {
           if (data.length > 0) {
             //update redux to include everything in cart
             data.forEach((item: Item) => {
-              dispatch(cartActions.addToCart({item: item}));
+              dispatch(cartActions.addToCart({ item: item }));
             });
           }
         });
     }
-  }, []);
+  }, [productId]);
 
   const clickHandler = (e: React.MouseEvent<HTMLElement>) => {
     setSelected(Number(e.currentTarget.innerText));
@@ -104,19 +102,21 @@ const Product: React.FC = () => {
     })
       .then((res) => res.json())
       .then((data) => {
-        if(data.message === 'success'){
-        setShowAlert(true)
-        setTimeout(() => {
-          setShowAlert(false)
-        }, 3000)
-        console.log("data from db on adding: ", data);
-        const changedProduct: Item = data.cart.find(
-          (item: Item) => item.product_id === productId
-        );
-        console.log("changed product: ", changedProduct);
-        dispatch(
-          cartActions.addToCart({ id: productId, price: changedProduct.price, item: changedProduct })
-        );
+        if (data.message === "success") {
+          setShowAlert(true);
+          setTimeout(() => {
+            setShowAlert(false);
+          }, 3000);
+          const changedProduct: Item = data.cart.find(
+            (item: Item) => item.product_id === productId
+          );
+          dispatch(
+            cartActions.addToCart({
+              id: productId,
+              price: changedProduct.price,
+              item: changedProduct,
+            })
+          );
         }
       })
       .catch((err) => {
@@ -124,18 +124,13 @@ const Product: React.FC = () => {
       });
   };
 
-  const test = () => {
-    console.log(cartDataInRedux.cart)
-  }
-
   return (
     <Container>
       <h1>{product && product.product_name}</h1>
 
       <ProductsCarousel />
-      {showAlert && <Alert text='Product added to the cart, Thanks' />}
+      {showAlert && <Alert text="Product added to the cart, Thanks" />}
       <ProductInfo>
-        <button onClick={test}>check</button>
         <Price>{product && product.product_price}</Price>
         <SmallInfo>{product && product.product_desc}</SmallInfo>
         <SmallInfo>Selected Size: {selected}</SmallInfo>

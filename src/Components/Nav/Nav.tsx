@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import {
   NavContainer,
   Backdrop,
@@ -7,19 +7,24 @@ import {
   Search,
   Login,
   Cart,
+  SearchPopUp,
 } from "./styles";
 import NavMenu from "./NavMenu";
 import UserMenu from "../UserMenu/UserMenu";
+import Alert from "../Alert/Alert";
 
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { AuthState } from "../../types";
+import { AuthState, productsData } from "../../types";
 
 const Nav: React.FC = () => {
   const [show, setShow] = useState(false);
   const [showSearch, setShowSearch] = useState(false);
   const [showBrand, setShowBrand] = useState(true);
-  const [showUserMenu, setShowUsermenu] = useState(true)
+  const [showUserMenu, setShowUsermenu] = useState(false);
+  const [showLogoutAlert, setShowLogoutState] = useState(false);
+  const [searchData, setSearchData] = useState<productsData[] | null>(null);
+  const [showSearchPopUp, setShowSearchPopUp] = useState(false);
 
   const navigate = useNavigate();
 
@@ -34,50 +39,90 @@ const Nav: React.FC = () => {
   //will be used for the user pop up menu
   const user = useSelector((state: AuthState) => state.auth.user);
   const userMenu = () => {
-    console.log(user.id.length)
-
-    if(user.id.length > 0){
+    if (user.email.length > 0) {
       //means a user is logged in
-      setShowUsermenu(!showUserMenu) 
-    }else if (user.id.length === 0){
-      navigate('/login')
+      setShowUsermenu(!showUserMenu);
+    } else {
+      navigate("/login");
     }
+  };
 
-  }
+  //user menu updating func
+  const userMenuState = () => {
+    setShowUsermenu(!showUserMenu);
+  };
+
+  const logoutAlertState = (state: boolean) => {
+    setShowLogoutState(state);
+  };
 
   //func to search db
   //take in a search:string and send it to /api/search the db will query postgresql products based on product_name
   const searchDB = (e: React.FormEvent<HTMLInputElement>) => {
-    const search = e.currentTarget.value
-    console.log(search)
-
-    fetch('/api/search', {
-      method: 'GET',
-      credentials: 'include',
-      body: search
+    fetch("/api/search", {
+      method: "POST",
+      credentials: "include",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        search: e.currentTarget.value,
+      }),
     })
-    .then((res) => res.json())
-    .then((data) => {
-      console.log(data)
-    })
-  }
+      .then((res) => res.json())
+      .then((data: productsData[]) => {
+        if (data.length > 0) {
+          setSearchData(data);
+          setShowSearchPopUp(true);
+        } else {
+          setSearchData(null);
+          setShowSearchPopUp(true);
+        }
+      });
+  };
 
   return (
     <NavContainer>
       {show && <Backdrop onClick={() => setShow(false)} />}
-
+      {showLogoutAlert && <Alert text="Succesfully logged out" />}
       <NavMenu show={show} setShow={setShow} />
 
       {showBrand && <Brand onClick={() => navigate("/")}>My Brand Name</Brand>}
-      {showUserMenu && <UserMenu />}
+      {showUserMenu && (
+        <UserMenu
+          logoutAlertState={logoutAlertState}
+          userMenuState={userMenuState}
+        />
+      )}
 
       <RightNav>
- 
-     
-
         {showSearch && (
           <div>
-            <input onChange={searchDB} type="text" autoFocus />
+            <input
+              onClick={() => {
+                if (showSearchPopUp) {
+                  setShowSearchPopUp(false);
+                }
+              }}
+              onChange={searchDB}
+              type="text"
+              autoFocus
+            />
+            {showSearchPopUp && (
+              <SearchPopUp>
+                {searchData &&
+                  searchData.map((item) => (
+                    <li
+                      onClick={() => {
+                        navigate(`/product/${item.id}`);
+                        setShowSearchPopUp(false);
+                      }}
+                    >
+                      {item.product_name}
+                    </li>
+                  ))}
+              </SearchPopUp>
+            )}
           </div>
         )}
 

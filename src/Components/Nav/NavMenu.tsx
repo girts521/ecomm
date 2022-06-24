@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { Circle, Burger, CloseBtn, BurgerLinks } from "./styles";
-import {CategoriesFromDB} from '../../types'
+import { CategoriesFromDB } from "../../types";
 
 const NavMenu: React.FC<{
   setShow: (state: boolean) => void;
@@ -21,7 +21,6 @@ const NavMenu: React.FC<{
     })
       .then((res) => res.json())
       .then((data: CategoriesFromDB[]) => {
-        console.log(data);
         if (data.length > 0) {
           data.forEach((item: CategoriesFromDB) => {
             setCategories((categories) => [...categories, item.category_name]);

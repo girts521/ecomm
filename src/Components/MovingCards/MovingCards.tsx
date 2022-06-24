@@ -59,7 +59,6 @@ const Categories: React.FC<{ heading: String }> = ({ heading }) => {
       })
         .then((res) => res.json())
         .then((data: MovingCardData[]) => {
-          console.log(data);
           setCardData(data);
         });
     }

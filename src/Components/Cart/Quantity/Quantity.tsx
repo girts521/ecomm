@@ -1,43 +1,48 @@
 import React from "react";
 import { useState } from "react";
 import { Container } from "./styles";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { cartActions } from "../../../store/cart";
-import { State } from "../../../types";
 import { Item } from "../../../types";
 
 const Quantity: React.FC<{ product: Item }> = ({ product }) => {
   const dispatch = useDispatch();
-  const cartData = useSelector((state: State) => state.cart);
 
   const removeProducts = (product: Item) => {
     const url = "/api/deleteItem";
-        fetch(url, {
-          method: "POST",
-          credentials: "include",
-          headers: {
-            "Content-Type": "application/json",
-            Credentials: "include",
-          },
-          body: JSON.stringify({
-            product_id: product.product_id,
-          }),
-        })
-          .then((res) => res.json())
-          .then((data) => {
-            if (data.message === "success") {
-              //delete item from cart in redux
-              const changedProduct: Item = data.cart.find((item: Item) => item.product_id === product.product_id)
-              if(changedProduct){
-              dispatch(cartActions.removeFromCart({id: product.product_id, price: changedProduct.price }));
-              }else{
-                dispatch(cartActions.removeFromCart({id: product.product_id }));
-              }
-            } else {
-              console.log("error");
-            }
-          });
+    fetch(url, {
+      method: "POST",
+      credentials: "include",
+      headers: {
+        "Content-Type": "application/json",
+        Credentials: "include",
+      },
+      body: JSON.stringify({
+        product_id: product.product_id,
+      }),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.message === "success") {
+          //delete item from cart in redux
+          const changedProduct: Item = data.cart.find(
+            (item: Item) => item.product_id === product.product_id
+          );
+          if (changedProduct) {
+            dispatch(
+              cartActions.removeFromCart({
+                id: product.product_id,
+                price: changedProduct.price,
+              })
+            );
+          } else {
+            dispatch(cartActions.removeFromCart({ id: product.product_id }));
+          }
+        } else {
+          console.log("error");
         }
+      });
+  };
 
   //state for product quantity
   const [quantity, setQuantity] = useState(product?.quantity || 1);
@@ -65,16 +70,22 @@ const Quantity: React.FC<{ product: Item }> = ({ product }) => {
             },
           }),
         })
-        .then((res) => res.json())
+          .then((res) => res.json())
           .then((data) => {
-            console.log('data when adding: ', data);
             if (data.message === "success") {
-            const changedProduct: Item = data.cart.find((item: Item) => item.product_id === product.product_id)
-            dispatch(cartActions.addToCart({id: product!.product_id, price: changedProduct.price }));
-            }else if(data.message === "error"){
+              const changedProduct: Item = data.cart.find(
+                (item: Item) => item.product_id === product.product_id
+              );
+              dispatch(
+                cartActions.addToCart({
+                  id: product!.product_id,
+                  price: changedProduct.price,
+                })
+              );
+            } else if (data.message === "error") {
               console.log("error");
             }
-          })
+          });
       }
     } else {
       return;

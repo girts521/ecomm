@@ -1,7 +1,7 @@
-import React, {useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Container } from "./style";
-import {CategoriesFromDB} from "../../types";
+import { CategoriesFromDB } from "../../types";
 
 const CategoriesBar: React.FC = () => {
   const [categories, setCategories] = useState<string[]>([]);
@@ -18,7 +18,6 @@ const CategoriesBar: React.FC = () => {
     })
       .then((res) => res.json())
       .then((data: CategoriesFromDB[]) => {
-        console.log(data);
         if (data.length > 0) {
           data.forEach((item: CategoriesFromDB) => {
             setCategories((categories) => [...categories, item.category_name]);

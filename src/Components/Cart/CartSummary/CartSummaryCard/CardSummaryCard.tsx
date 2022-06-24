@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { Container, ProductInfo } from "./styles";
 import Quantity from "../../Quantity/Quantity";
 
